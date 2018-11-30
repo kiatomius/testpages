@@ -1,5 +1,5 @@
 ---
-title: EDA
+title: EDA Test
 notebook: Model_training_Nov26.ipynb
 nav_include: 1
 ---
