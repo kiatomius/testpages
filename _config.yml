@@ -1,6 +1,6 @@
 theme: jekyll-theme-primer
-title: Support Vector Olives
-description: Keeping Italian Olives Pure!
+title: CS109 Final Project (Group 48)
+description: CS109 Final Project
 baseurl:
 markdown: kramdown
 kramdown:
