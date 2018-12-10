@@ -1,10 +1,9 @@
 ---
-title: CS109 Final Project
+title: Tweet Bot Detection
 ---
 
-This is the home page
-
 ## CS109 Final Project
+Munmun, Daisuke, Motoaki (Group 38)
 
 >here is a quote
 
