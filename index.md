@@ -4,7 +4,7 @@ title: Machine Learning & Analysis for Twitter Bot Detection
 CS109 Final Project\n
 Munmun, Daisuke, Motoaki (Group 48)
 
-<img src="index_files/twitcensor.jpg" alt="twitcensor" width="500"/>
+<img src="index_files/twitcensor.jpg" alt="twitcensor" width="300"/>
 
 ## Motivation
 
@@ -46,3 +46,5 @@ $$ G_{\mu\nu} + \Lambda g_{\mu\nu}  = 8 \pi T_{\mu\nu} . $$
 
 
 <img src="index_files/brexit.png" alt="brexit" width="200"/>
+
+picture source: https://www.theverge.com/2017/8/13/16125852/identify-twitter-bot-botometer-spambot-program
