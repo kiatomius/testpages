@@ -1,11 +1,12 @@
 ---
-title: Tweet Bot Detection
+title: Machine Learning & Analysis for Twitter Bot Detection
 ---
+>CS109 Final Project
+>Munmun, Daisuke, Motoaki (Group 48)
 
-## CS109 Final Project
-Munmun, Daisuke, Motoaki (Group 38)
+## Motivation
 
->here is a quote
+For our CS109A Final Project, we chose 
 
 ## General Approach 
 
