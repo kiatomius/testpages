@@ -15,6 +15,11 @@ This is the home page
 Here is *emph* and **bold**.
 
 ![png](index_files/brexit.png)
+img.resize {
+  max-width:50%;
+  max-height:50%;
+}
+
 
 Here is some inline math $\alpha = \frac{\beta}{\gamma}$ and, of-course, E rules:
 
