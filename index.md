@@ -4,7 +4,7 @@ title: Machine Learning & Analysis for Twitter Bot Detection
 CS109 Final Project
 Munmun, Daisuke, Motoaki (Group 48)
 
-<img src="index_files/twitcensor.png" alt="brexit" width="200"/>
+<img src="index_files/twitcensor.png" alt="twitcensor" width="500"/>
 
 ## Motivation
 
