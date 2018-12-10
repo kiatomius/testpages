@@ -14,7 +14,7 @@ This is the home page
 
 Here is *emph* and **bold**.
 
-![png](index_files/brexit.png = 250x)
+![png](index_files/brexit.png)
 
 
 Here is some inline math $\alpha = \frac{\beta}{\gamma}$ and, of-course, E rules:
