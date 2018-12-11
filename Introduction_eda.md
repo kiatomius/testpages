@@ -1,6 +1,6 @@
 ---
 title: Description of Data and EDA
-nav_include: 1
+nav_include: 2
 ---
 
 This is the home page

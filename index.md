@@ -20,10 +20,10 @@ In our commitment in adhering to scientific methodologies, we ruled out a number
 
 ## Summary:
 In summary, our general approach and objective may be summarized as follows:
-* 1. Explore dataset published by Cresci-2017
-* 2. Devise Classification Models to detect genuine twitter users and automated bots
-* 3. Seek to achieve accuracy score at levels at least equivalent to Cresci-2017
-* 4. Seek to improve the accuracy score with our unique approach where possible.
+* Explore dataset published by Cresci-2017
+* Devise Classification Models to detect genuine twitter users and automated bots
+* Seek to achieve accuracy score at levels at least equivalent to Cresci-2017
+* Seek to improve the accuracy score with our unique approach where possible.
 
 picture source: https://www.theverge.com/2017/8/13/16125852/identify-twitter-bot-botometer-spambot-program
-[2] bot repository https://botometer.iuni.iu.edu/bot-repository/index.html
+bot repository https://botometer.iuni.iu.edu/bot-repository/index.html
