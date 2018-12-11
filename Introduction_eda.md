@@ -18,40 +18,7 @@ nav_include: 2
 
 
 ```python
-#explore training dataset
 
-df = df_train
-
-fig, ax = plt.subplots(1,2, figsize = (15, 5))
-alpha = 0.3
-markersize = 1
-
-ax[0].plot(df[df['bot_or_not']==1]['followers_count'],
-         df[df['bot_or_not']==1]['friends_count'],
-         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
-
-ax[0].plot(df[df['bot_or_not']==0]['followers_count'],
-         df[df['bot_or_not']==0]['friends_count'],
-         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
-ax[0].set_xlabel('followers_count')
-ax[0].set_ylabel('friends_count')
-ax[0].set_xlim((0, 10000))
-ax[0].set_ylim((0, 10000))
-ax[0].legend()
-
-
-ax[1].plot(df[df['bot_or_not']==1]['listed_count'],
-         df[df['bot_or_not']==1]['friends_count'],
-         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
-
-ax[1].plot(df[df['bot_or_not']==0]['listed_count'],
-         df[df['bot_or_not']==0]['friends_count'],
-         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
-ax[1].set_xlabel('listed_count')
-ax[1].set_ylabel('friends_count')
-ax[1].set_xlim((0, 200))
-ax[1].set_ylim((0, 8000))
-ax[1].legend()
 ```
 
 
@@ -76,20 +43,6 @@ fig.subplots_adjust(bottom = -0.8, top = 1)
 
 size = 5
 
-ax[0,0].plot(df['friends_count'], df['bot_or_not'], 'o', markersize = size, alpha =0.3)
-ax[0,0].set_xlabel('friends_count')
-
-ax[0,1].plot(df['followers_count'], df['bot_or_not'], 'o', markersize = size, alpha =0.3)
-ax[0,1].set_xlabel('followers_count')
-
-ax[0,2].plot(df['listed_count'], df['bot_or_not'], 'o', markersize = size, alpha =0.3)
-ax[0,2].set_xlabel('listed_count')
-
-ax[1,0].plot(df['favourites_count'], df['bot_or_not'], 'o', markersize = size, alpha =0.3)
-ax[1,0].set_xlabel('favourites_count')
-
-ax[1,1].plot(df['statuses_count'], df['bot_or_not'], 'o', markersize = size, alpha =0.3)
-ax[1,1].set_xlabel('statuses_count')
 ```
 
 
@@ -280,3 +233,4 @@ ax[1].set_title(var1)
 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
+
