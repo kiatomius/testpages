@@ -31,7 +31,7 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 * While it is clear that two unsupervised models proposed in Ahmed et al, and Cresci et al. perform far better than other models, for the scope of our research, we seek to achieve accuracy score at least as high as those achieved by **Yang et al.** since unsupervised models are beyond our current technical capabilities, but we are able to devise a range of supervised models.
 * BotOrNot? Is a publicly available software that generates a score between 0 to 5, indicating the probability of whether a specific user account is automated twitter bot or not. This software is now known as Botometer. We also seek to refer to the accuracy levels achieved by Botometer as our higher benchmark to target.
 
-<img src="index_files/Twitter-bot-or-not.png" alt="Twitter-bot-or-not" width="200"/>
+              <img src="index_files/Twitter-bot-or-not.png" alt="Twitter-bot-or-not" width="200"/>
 
 
 ## General Approach 
