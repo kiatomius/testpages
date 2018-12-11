@@ -17,15 +17,6 @@ nav_include: 2
 
 
 
-```python
-
-```
-
-
-
-
-
-    <matplotlib.legend.Legend at 0x1d645b6fe80>
 
 
 
@@ -35,22 +26,6 @@ nav_include: 2
 
 
 
-```python
-df = df_train
-
-fig, ax = plt.subplots (2,3, figsize = (10,3))
-fig.subplots_adjust(bottom = -0.8, top = 1)
-
-size = 5
-
-```
-
-
-
-
-
-    Text(0.5,0,'statuses_count')
-
 
 
 
@@ -59,33 +34,7 @@ size = 5
 
 
 
-```python
-df = df_train
 
-fig, ax = plt.subplots(1,2, figsize = (10, 3))
-size = 0.5
-alpha = 0.5
-
-var1 = 'favourites_count'
-
-ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
-           bins =np.arange(0, 10, 1))
-
-ax[0].legend()
-
-ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
-          bins = np.arange(0, 10000, 100))
-ax[1].legend()
-
-ax[0].set_title(var1)
-ax[1].set_title(var1)
-```
-
-
-
-
-
-    Text(0.5,1,'favourites_count')
 
 
 
@@ -95,32 +44,7 @@ ax[1].set_title(var1)
 
 
 
-```python
-df = df_train
 
-fig, ax = plt.subplots(1,2, figsize = (10, 3))
-size = 0.5
-alpha = 0.5
-
-var2 = 'friends_count'
-
-ax[0].hist(df[df['bot_or_not']==1][var2],color = 'red',  alpha = alpha, label = 'bot',
-           bins =np.arange(0, 5000, 100))
-ax[0].legend()
-
-ax[1].hist(df[df['bot_or_not']==0][var2],color = 'blue', alpha = alpha, label = 'human',
-          bins = np.arange(0, 5000, 100))
-ax[1].legend()
-
-ax[0].set_title(var2)
-ax[1].set_title(var2)
-```
-
-
-
-
-
-    Text(0.5,1,'friends_count')
 
 
 
@@ -130,33 +54,6 @@ ax[1].set_title(var2)
 
 
 
-```python
-df = df_train
-
-
-fig, ax = plt.subplots(1,2, figsize = (10, 3))
-size = 0.5
-alpha = 0.5
-
-var1 = 'followers_count'
-
-ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
-           bins =np.arange(0, 4000, 100))
-
-ax[0].legend()
-ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
-          bins = np.arange(0, 4000, 100))
-ax[1].legend()
-
-ax[0].set_title(var1)
-ax[1].set_title(var1)
-```
-
-
-
-
-
-    Text(0.5,1,'followers_count')
 
 
 
@@ -166,33 +63,7 @@ ax[1].set_title(var1)
 
 
 
-```python
-df = df_train
 
-
-fig, ax = plt.subplots(1,2, figsize = (10, 3))
-size = 0.5
-alpha = 0.5
-
-var1 = 'listed_count'
-
-ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
-           bins =np.arange(0, 50, 1))
-
-ax[0].legend()
-ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
-          bins = np.arange(0, 50, 1))
-ax[1].legend()
-
-ax[0].set_title(var1)
-ax[1].set_title(var1)
-```
-
-
-
-
-
-    Text(0.5,1,'listed_count')
 
 
 
@@ -202,35 +73,58 @@ ax[1].set_title(var1)
 
 
 
-```python
-df = df_train
-
-fig, ax = plt.subplots(1,2, figsize = (10, 3))
-size = 0.5
-alpha = 0.5
-
-var1 = 'statuses_count'
-
-ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
-           bins =np.arange(0, 200, 10))
-
-ax[0].legend()
-ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
-          bins = np.arange(0, 10000, 100))
-ax[1].legend()
-
-ax[0].set_title(var1)
-ax[1].set_title(var1)
-```
-
-
-
-
-
-    Text(0.5,1,'statuses_count')
 
 
 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
 
+
+
+
+
+
+
+
+
+
+![png](EDA_Dec_2_files/EDA_Dec_2_20_1.png)
+
+
+
+
+
+
+    
+
+
+
+
+
+
+![png](EDA_Dec_2_files/EDA_Dec_2_22_2.png)
+
+
+
+
+
+
+![png](EDA_Dec_2_files/EDA_Dec_2_25_1.png)
+
+
+
+
+
+
+
+
+
+
+
+![png](EDA_Dec_2_files/EDA_Dec_2_28_1.png)
+
+
+
+
+
+    
