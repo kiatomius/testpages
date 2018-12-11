@@ -31,8 +31,6 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 
 _Example of Botometer assessing an account of @ianbremmer_
 
-***
-
 <p align="center">
   <img src="index_files/ianbremmer.png" alt="ianbremmer"/>
 </p>
@@ -41,3 +39,4 @@ _Example of Botometer assessing an account of @ianbremmer_
 * The breakdown of scores that contribute to the overall score can be seen, such as those from text analysis (content, sentiment), or from user-information (friend, network, temporal, user)
 
 ***
+_botometer page (https://botometer.iuni.iu.edu/#!/)_

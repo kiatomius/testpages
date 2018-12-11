@@ -4,7 +4,8 @@ nav_include: 2
 ---
 ## 1. Introduction and Description of Data
 
-
+We obtained the original dataset used in Cresci-2017 from Bot Repository[1]. The dataset consists of a number of datafiles, consisting of user data & tweets from genuine accounts as well as a range of different bot accounts. The background behind the choice and the methodology of obtaining the data is discussed extensively in Cresci-2017, and is summarized in the following table[2]:
+ 
 | Dataset                 | Description                                             | Accounts | Tweets  | Year |
 |-------------------------|---------------------------------------------------------|----------|---------|------|
 | genuine accounts        |  Verified accounts that are human operated              | 3474     | 8377522 | 2011 |
@@ -16,6 +17,15 @@ nav_include: 2
 | Traditional Spambots #3 | Automated accounts spamming job offers                  | 433      | 5794931 | 2013 |
 | Traditional Spambots #4 | Another group of automated accounts spamming job offers | 1128     | 133311  | 2009 |
 
+From here, we constructed the training & testing dataset in identical manner to those presented in the paper. The methodology behind the construction of the data is summarized in the below chart. In essence, it can be described as follows:
+* Training dataset is created by sampling 50% data of data from Genuine accounts, and 50% from **Traditional Spambots #1**.
+* Testing dataset #1 is created by taking **all** data from Social Spambots #1, and equal number of samples from genuine accounts that were not used in creaging training dataset.
+* Testing dataset #2 is created by taking **all** data from Social Spambots #2, and equal number of samples from genuine accounts that were not used in creating training dataset.
+* The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
+
+<p align="center">
+  <img src="index_files/data_split.png" alt="data_split"/>
+</p>
 
 
 
@@ -50,6 +60,11 @@ After cleaning the data, we perform an initial analysis of the number of friends
 ![png](EDA_Dec_2_files/EDA_Dec_2_12_1.png)
 
 * Bots mark nearly zero statuses as favorite : how we understand this is, if bots exist to tweet or retweet their agenda or to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. 
+
+
+***
+_[1] Bot Repository data download page (https://botometer.iuni.iu.edu/bot-repository/datasets.html)_ 
+_[2] Cresci-2017, page 2_
 
 
 
