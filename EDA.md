@@ -24,7 +24,7 @@ From here, we constructed the training & testing dataset in identical manner to 
 * The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
 
 <p align="center">
-  <img src="index_files/data_split.png" alt="data_split"/>
+  <img src="index_files/data_split.png" alt="data_split" width="500"/>
 </p>
 
 
