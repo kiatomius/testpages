@@ -29,6 +29,11 @@ From here, we constructed the training & testing dataset in identical manner to 
 * The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
 * We initially took the abovementioned 'conventional approach', inspired by the data-processing techniques that we learned in CS109 course, however this resulted in generating unrealistically high accuracy scores for the test sets, therefore we reverted to the methodologies applied in Cresci-2017.
 
+## 2. Data Cleaning
+
+The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.
+
+
 ## 2. EDA
 
 After cleaning the data, we perform an initial analysis of the number of friends, number of followers and the number of lists the user is part of for both humans and bots. 
@@ -64,8 +69,8 @@ After cleaning the data, we perform an initial analysis of the number of friends
 
 ***
 _[1] Bot Repository data download page (https://botometer.iuni.iu.edu/bot-repository/datasets.html)_ 
-_[2] Cresci-2017, page 2_
-
+_[2] Cresci-2017, page 2_  
+_[3] Shad and Gopani https://www.youtube.com/watch?v=WYCZ6ZjfAJ0_
 
 
 
