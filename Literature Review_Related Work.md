@@ -4,7 +4,7 @@ nav_include: 1
 ---
 
 ## Cresci-2017
-**The paradigm-shift of social spambots: Evidence, theories, and tools for the arms race** 
+**The paradigm-shift of social spambots: Evidence, theories, and tools for the arms race**  
 Stefano Cresci, Roberto Di Pietro, Marinella Petrocchi, Angelo Spognardi, Maurizio Tesconi
 
 Cresci-2017 approaches the topic of automated twitter-bots detection 
