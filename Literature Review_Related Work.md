@@ -37,4 +37,7 @@ _Example of Botometer assessing an account of @ianbremmer_
   <img src="index_files/ianbremmer.png" alt="ianbremmer"/>
 </p>
 
+* Here the overall score of 0.2/5 indicated a high unlikelihood that this account is a automated bot.
+* The breakdown of scores that contribute to the overall score can be seen, such as those from text analysis (content, sentiment), or from user-information (friend, network, temporal, user)
+
 ***
