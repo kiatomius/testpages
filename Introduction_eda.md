@@ -2,6 +2,8 @@
 title: Description of Data and EDA
 nav_include: 2
 ---
+# 1. Introduction and Description of Data
+
 
 | Dataset                 | Description                                             | Accounts | Tweets  | Year |
 |-------------------------|---------------------------------------------------------|----------|---------|------|
@@ -17,7 +19,7 @@ nav_include: 2
 
 
 
-
+# 2. EDA
 
 
 
