@@ -30,7 +30,7 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 * BotOrNot? Is a publicly available software that generates a score between 0 to 5, indicating the probability of whether a specific user account is automated twitter bot or not. This software is now known as Botometer. We also seek to refer to the accuracy levels achieved by Botometer as our higher benchmark to target.
 
 <p align="center">
-  <img src="index_files/Twitter-bot-or-not.png" alt="Twitter-bot-or-not" width="200"/>
+  <img src="index_files/ianbremmer.png" alt="ianbremmer"/>
 </p>
 
 picture taken from (https://teksecurityblog.com/twitter-bots-not-up-my-skirt/)
