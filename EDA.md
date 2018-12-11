@@ -68,7 +68,7 @@ After cleaning the data, we perform an initial analysis of the number of friends
 
 
 ***
-_[1] Bot Repository data download page (https://botometer.iuni.iu.edu/bot-repository/datasets.html)_ 
+_[1] Bot Repository data download page (https://botometer.iuni.iu.edu/bot-repository/datasets.html)_  
 _[2] Cresci-2017, page 2_  
 _[3] Shad and Gopani https://www.youtube.com/watch?v=WYCZ6ZjfAJ0_
 
