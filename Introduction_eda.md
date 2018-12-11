@@ -23,6 +23,7 @@ nav_include: 2
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
+<img src="EDA_Dec_2_files/EDA_Dec_2_10_1.png" alt="drawing" width="200"/>
 
 
 
