@@ -5,6 +5,6 @@ nav_include: 4
 
 ## Summary
 
-test
-make new changes
-I like my life
+* 1. Summary
+* 2. Results
+* 3. Conclusion & Future Work 
