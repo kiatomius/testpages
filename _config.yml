@@ -1,6 +1,6 @@
 theme: jekyll-theme-primer
-title: CS109 Final Project (Group 48)
-description: CS109 Final Project
+title: Machine Learning & Analysis for Twitter Bot Detection
+description: Machine Learning & Analysis for Twitter Bot Detection
 baseurl:
 markdown: kramdown
 kramdown:
