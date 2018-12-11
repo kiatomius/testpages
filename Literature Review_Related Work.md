@@ -33,7 +33,5 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 
 <img src="index_files/Twitter-bot-or-not.png" alt="Twitter-bot-or-not" width="200"/>
 
-
-
 picture taken from (https://teksecurityblog.com/twitter-bots-not-up-my-skirt/)
 
