@@ -18,39 +18,12 @@ As we sought to detect certain behavioural patterns of the ‘bots’ and apply 
 
 In our commitment in adhering to scientific methodologies, we ruled out a number of approaches suggested in the literature, and focused on methodologies suggested by the paper “cresci-2017” (Paper hereafter), for the researchers for the Paper has gone through extensive and rigorous efforts to generate a dataset of genuine twitter users and twitter bots, and they have generously published the relevant data on BotRepository[2], which provided an ideal environment upon which for us to carry out this project.
 
-
-## Overview
-
-## Motivation
-
-## Description of Data and EDA
-
-## Literature Review / Related Work
-
-## Modeling Approach
-
-## Results
-
-## Conclusion and Summary
-
-## Future Work
-
-
-
-
-
-Here is *emph* and **bold**.
-
-![png](index_files/brexit.png)
-
-
-Here is some inline math $\alpha = \frac{\beta}{\gamma}$ and, of-course, E rules:
-
-$$ G_{\mu\nu} + \Lambda g_{\mu\nu}  = 8 \pi T_{\mu\nu} . $$
-
-
-<img src="index_files/brexit.png" alt="brexit" width="200"/>
+## Summary:
+In summary, our general approach and objective may be summarized as follows:
+* 1. Explore dataset published by Cresci-2017
+* 2. Devise Classification Models to detect genuine twitter users and automated bots
+* 3. Seek to achieve accuracy score at levels at least equivalent to Cresci-2017
+* 4. Seek to improve the accuracy score with our unique approach where possible.
 
 picture source: https://www.theverge.com/2017/8/13/16125852/identify-twitter-bot-botometer-spambot-program
-
-bot repository https://botometer.iuni.iu.edu/bot-repository/index.html
+[2] bot repository https://botometer.iuni.iu.edu/bot-repository/index.html
