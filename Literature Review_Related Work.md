@@ -31,7 +31,10 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 
 __Example of Botometer assessing an account of @ianbremmer__
 
+***
+
 <p align="center">
   <img src="index_files/ianbremmer.png" alt="ianbremmer"/>
 </p>
 
+***
