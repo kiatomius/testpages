@@ -39,4 +39,5 @@ _Example of Botometer assessing an account of @ianbremmer_
 * The breakdown of scores that contribute to the overall score can be seen, such as those from text analysis (content, sentiment), or from user-information (friend, network, temporal, user)
 
 ***
+
 _botometer page (https://botometer.iuni.iu.edu/#!/)_
