@@ -1,14 +1,8 @@
 ---
-title: K Nearest Neighbours
+title: Models
 notebook: EDA_Dec_2.ipynb
+nav_include: 3
 ---
-
-## Contents
-{:.no_toc}
-*  
-{: toc}
-
-
 
 ```python
 import json
@@ -75,6 +69,7 @@ columns_to_keep = ['id', 'name', 'screen_name', 'statuses_count', 'followers_cou
        'profile_text_color', 'profile_image_url_https','follow_request_sent', 
        'verified','description', 'following']
 
+# trim the bot data and add a binary column = 1 to indicate that this data is human data
 
 df_gen_users = df_gen_users[columns_to_keep]
 df_gen_users['bot'] = 0
@@ -84,9 +79,12 @@ df_gen_users['bot'] = 0
 
 
 ```python
+# download data for traditional bots for training purpose
+# use trad_bot_1 since it was the main focus of the 'traditional model'
 
 df_trad_bot1_users = pd.read_csv('datasets_full.csv/traditional_spambots_1.csv/users.csv')
 
+# trim the bot data and add a binary column = 1 to indicate that this data is bot data
 df_trad_bot1_users = df_trad_bot1_users[columns_to_keep]
 df_trad_bot1_users['bot'] = 1
 ```
@@ -95,6 +93,7 @@ df_trad_bot1_users['bot'] = 1
 
 
 ```python
+# split the genuine data into training set and test set to avoid overlap
 
 df_gen_train, df_gen_test = train_test_split(df_gen_users, test_size = 0.5, shuffle = True)
 ```
@@ -113,6 +112,8 @@ df_train = shuffle(df_train)
 
 
 ```python
+# Create the test set
+# Use social spambots #1 and social spambots #3 as two separate test data set
 
 df_test_bot1_users = pd.read_csv('datasets_full.csv/social_spambots_1.csv/users.csv')
 df_test_bot3_users = pd.read_csv('datasets_full.csv/social_spambots_3.csv/users.csv')
@@ -173,6 +174,8 @@ def location_check(df):
             
     return loc
 
+# cleaning step 3
+# Set description to 1 if it contains either of these words: 
 #‘bot’, ‘robot’, ‘artificial’, ‘intelligence’, ‘neural’, ‘network’, ‘automatic’ and 0 otherwise.
 
 def description_check(df):
@@ -552,16 +555,22 @@ ax[1].set_title(var1)
 ```python
 #Prepare dataset to feed into the model
 
+# X_train from df_train
 X_train = df_train.drop(columns=['bot_or_not', 'screen_name', 'name'])
 
+# y_trian from df_train
 y_train = df_train[['bot_or_not']]
 
+# X_test_1 from df_test_1
 X_test_1 = df_test_1.drop(columns=['bot_or_not', 'screen_name', 'name'])
 
+# y_test_1 from df_test_1
 y_test_1 = df_test_1[['bot_or_not']]
 
+# X_test_3 from df_test_3
 X_test_3 = df_test_3.drop(columns=['bot_or_not', 'screen_name', 'name'])
 
+# y_test_3 from df_test_3
 y_test_3 = df_test_3[['bot_or_not']]
 ```
 
@@ -569,6 +578,7 @@ y_test_3 = df_test_3[['bot_or_not']]
 
 
 ```python
+# Simple Decision Tree
 
 decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
 decision_model.fit(X_train, y_train)
@@ -814,6 +824,7 @@ pd.Series(rf_model.feature_importances_,index=list(X_train)).sort_values().plot(
 
 
 ```python
+# Multinominal Logistic Regression
 
 log_model = LogisticRegressionCV(fit_intercept=True, cv=5, multi_class="ovr", penalty='l2', max_iter=10000)
 log_model.fit(X_train, y_train.values.reshape(-1))
@@ -842,6 +853,7 @@ print('accuracy score of the test set with social spambot #3 is {}%'.format(test
 
 
 ```python
+# K Nearest Neighbours
 
 def normalize (df):
     con_var = ['followers_count', 'listed_count', 'friends_count', 'favourites_count', 'statuses_count']
