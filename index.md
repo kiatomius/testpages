@@ -33,6 +33,7 @@ In summary, our general approach and objective may be summarized as follows:
 * Seek to improve the accuracy score with our unique approach where possible.
 
 ***
+
 _team Github page (https://github.com/motoakisumi)_  
 _picture source (https://www.theverge.com/2017/8/13/16125852/identify-twitter-bot-botometer-spambot-program)_  
 _bot repository (https://botometer.iuni.iu.edu/bot-repository/index.html)_
