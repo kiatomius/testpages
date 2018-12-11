@@ -1,6 +1,6 @@
 theme: jekyll-theme-primer
-title: Machine Learning & Analysis for Twitter Bot Detection
-description: Machine Learning & Analysis for Twitter Bot Detection
+title: Twitter Bot Detection
+description: Twitter Bot Detection
 baseurl:
 markdown: kramdown
 kramdown:
