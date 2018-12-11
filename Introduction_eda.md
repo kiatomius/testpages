@@ -4,8 +4,6 @@ nav_include: 2
 ---
 ## 1. Introduction and Description of Data
 
-test_test
-
 
 | Dataset                 | Description                                             | Accounts | Tweets  | Year |
 |-------------------------|---------------------------------------------------------|----------|---------|------|
@@ -33,24 +31,25 @@ After cleaning the data, we perform an initial analysis of the number of friends
 * We find that humans, on average are part of more lists than bots. One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_11_1.png)
-There are a couple of important observations to glean from this. First, it supplements the observations on friends_count, followers_count and listed_count made above. Second, the behavior of bots is starkly different from humans in favourites_counts and statuses_count. Bots mark nearly zero statuses as favorite and bots don’t tweet as well. 
 
-We do a further breakdown of the five parameters for both, bot and human, to understand  how bots operate in the twitter space. 
+* There are a couple of important observations to glean from this. First, it supplements the observations on friends_count, followers_count and listed_count made above. Second, the behavior of bots is starkly different from humans in favourites_counts and statuses_count. Bots mark nearly zero statuses as favorite and bots don’t tweet as well. 
+
+* We do a further breakdown of the five parameters for both, bot and human, to understand  how bots operate in the twitter space. 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_13_1.png)
-This gives detailed information of how friends of bots differ from friends of humans. 
+* This gives detailed information of how friends of bots differ from friends of humans. 
 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_14_1.png)
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
 
-Between the two graphs above, we get a deeper understanding of how the bots really operate. From our analysis, the bot twitter space can be thought of as being divided into two distinct buckets, one with bots of 0 followers and one with bots of 0 statuses. The bots in the bucket of  0 followers tweet and retweet in line with their agenda. The other bucket, bots with 0 statuses don’t tweet however follow others and contribute the number of fake followers a user has.
+* Between the two graphs above, we get a deeper understanding of how the bots really operate. From our analysis, the bot twitter space can be thought of as being divided into two distinct buckets, one with bots of 0 followers and one with bots of 0 statuses. The bots in the bucket of  0 followers tweet and retweet in line with their agenda. The other bucket, bots with 0 statuses don’t tweet however follow others and contribute the number of fake followers a user has.
 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_12_1.png)
 
-Bots mark nearly zero statuses as favorite : how we understand this is, if bots exist to tweet or retweet their agenda or to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. 
+* Bots mark nearly zero statuses as favorite : how we understand this is, if bots exist to tweet or retweet their agenda or to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. 
 
 
 
