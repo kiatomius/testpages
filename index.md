@@ -16,7 +16,7 @@ As we sought to detect certain behavioural patterns of the ‘bots’ and apply 
 
 >how can we devise a reliable model if we don’t know what the right answer is?
 
-In our commitment in adhering to scientific methodologies, we ruled out a number of approaches suggested in the literature, and focused on methodologies suggested by the paper “cresci-2017” (Paper hereafter), for the researchers for the Paper has gone through extensive and rigorous efforts to generate a dataset of genuine twitter users and twitter bots, and they have generously published the relevant data on BotRepository[2], which provided an ideal environment upon which for us to carry out this project.
+In our commitment to adhere to scientific methods, we ruled out a number of approaches suggested in the literature, and focused on methodologies suggested in the paper “cresci-2017” ("Paper" hereafter), for the researchers for the Paper has gone through extensive and rigorous efforts to generate a dataset of genuine twitter users and twitter bots, and they have generously published the relevant data on BotRepository[2], which provided an ideal environment upon which for us to carry out this project.
 
 ## Summary:
 In summary, our general approach and objective may be summarized as follows:
