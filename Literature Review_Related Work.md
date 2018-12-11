@@ -15,17 +15,16 @@ Cresci-2017 approaches the topic of automated twitter-bots detection
 * Cresci-2017 then applied as range of models that are proposed in the literature, and compares the performance of the models in comprehensive manner. 
 
 
-| Techbique               | Methodology  | Accuracy |
-|-------------------------|--------------|----------|
-| Twitter countermeasures | mixed        | 0.691    |
-| Human Annotators        | manual       | 0.698    |
-| BotOrNot?               | supervised   | 0.734    |
-| **C. Yang et al.**          | **supervised**   | **0.506**    |
-| Miller et al.           | unsupervised | 0.526    |
-| Ahmed et al.            | unsupervised | 0.943    |
-| Cresci et al.           | unsupervised | 0.976    |
+| Techbique               | Methodology  |  Test Set 1 Accuracy |  Test Set 2 Accuracy |
+|-------------------------|--------------|----------------------|----------------------|
+| Twitter countermeasures | mixed        | 0.691                | 0.502                |
+| Human Annotators        | manual       | 0.698                | 0.829                |
+| BotOrNot?               | supervised   | 0.734                | 0.911                |
+| **C. Yang et al.**         | **supervised**   | **0.506**                | **0.629**                |
+| Miller et al.           | unsupervised | 0.526                | 0.481                |
+| Ahmed et al.            | unsupervised | 0.943                | 0.923                |
+| Cresci et al.           | unsupervised | 0.976                | 0.929                |
 
->here is a quote
 
 ## General Approach 
 
