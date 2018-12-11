@@ -21,13 +21,13 @@ From here, we constructed the training & testing dataset in identical manner to 
 * Training dataset is created by sampling 50% data of data from Genuine accounts, and 50% from **Traditional Spambots #1**.
 * Testing dataset #1 is created by taking **all** data from Social Spambots #1, and equal number of samples from genuine accounts that were not used in creaging training dataset.
 * Testing dataset #2 is created by taking **all** data from Social Spambots #2, and equal number of samples from genuine accounts that were not used in creating training dataset.
-* The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
 
 <p align="center">
   <img src="index_files/data_split.png" alt="data_split" width="500"/>
 </p>
 
-
+* The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
+* We initially took the abovementioned 'conventional approach', inspired by the data-processing techniques that we learned in CS109 course, however this resulted in generating unrealistically high accuracy scores for the test sets, therefore we reverted to the methodologies applied in Cresci-2017.
 
 ## 2. EDA
 
