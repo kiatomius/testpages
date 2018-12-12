@@ -224,6 +224,11 @@ Some of the key defined objects are as follows:
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_11_2.png)
 
+**status_count vs followers_couint**
+* It is also worth noting that across certain variables, such as presented hereby (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
+
+![png](EDA_Dec_2_files/EDA_Dec_2_11_3.png)
+
 * There are a couple of important observations to glean from this. First, it supplements the observations on friends_count, followers_count and listed_count made above. Second, the behavior of bots is starkly different from humans in favourites_counts and statuses_count. Bots mark nearly zero statuses as favorite and bots don’t tweet as well. 
 
 * We do a further breakdown of the five parameters for both, bot and human, to understand  how bots operate in the twitter space. 
