@@ -27,11 +27,11 @@ From here, we constructed the training & testing dataset in identical manner to 
 </p>
 
 * The important point that requires to be highlighted here is that Cresci-2017 approached the data preparation, NOT by creating a master dataset that consists of genuine and all types of bot accounts, and splitting to training/testing dataset, but the authors used **different bot datasets** for training set and testing set. 
-* We initially took the abovementioned 'conventional approach', inspired by the data-processing techniques that we learned in CS109 course, however this resulted in generating unrealistically high accuracy scores for the test sets, therefore we reverted to the methodologies applied in Cresci-2017.
+* We initially took the abovementioned 'conventional approach', inspired by the data-processing techniques that we learned in CS109, however this resulted in generating unrealistically high accuracy scores for the test sets, therefore we reverted to the methodologies applied in Cresci-2017.
 
 ## 2. Data Cleaning
 
-The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.The cleaning process is presented below.
+The raw dataset consists of a large number of variables for user and twitter data, from number of friends, number of hashtags, number of followers and so on. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to formats that can be fed into models.The cleaning process is presented below:
 
 ### 2.1 Narrowing columns 
 
@@ -185,13 +185,9 @@ def master_clean (df):
     return df
 ```
 
-
-
-
 ## 3. EDA
 
 After cleaning the data, we explored the data for several predictors to gain base understanding of the key variables, also to form some qualitative insights over differences between human and bot data.
-
 
 Full list of deinitions of user object on twitter can be found in the following URL. <https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object.html>  
 Some of the key defined objects are as follows:
@@ -208,24 +204,24 @@ Some of the key defined objects are as follows:
 
 #### 3.1.1 **followers_couint vs friends_count**
 * A casual separation between the clustering of human-data and bot-data can be observed, with bots tending to have lower number of followers given friends count, while humans seem to have more even relationship between friends_count and followers_count.
-* It appears that bots may have tendency to focus on increasing friends_count over other metrics. This complements the theory on bots regarding bots existing primarily to tweet, re-tweet statuses which promote their agenda to their 'friends'. This behavior is different from humans as humans (in ideal world) use twitter as a medium of exchange of information and are interested in both receiving and sending tweets.
+* It could be inferred from here that bots may have tendency to focus on increasing friends_count over other metrics. This complements the theory on bots that they exist primarily to tweet, re-tweet statuses which promote their agenda to their 'friends'. This behavior would be different from those of humans as humans (in ideal world) use twitter as a medium of exchange of information and are interested in both receiving and sending tweets.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
 #### 3.1.2 **listen_count vs friends_count**
-* A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clearm since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of human.
-* One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
+* A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clear since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of humans.
+* One interpretation of this, can be that humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
 
 #### 3.1.3 **listed_count vs followers_couint**
-* It is also worth noting that across certain variables, such as presented hereby (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
+* It is also worth noting that between certain variables, such as those presented above (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_2.png)
 
 #### 3.1.4 **status_count vs followers_count**
-* Exploration with additional variables. In general, it can be noted that bot data tend to be clusterd at certain extreme values. These are good indications that selected predictors can potentially have strong predictive power to determine automated bot users.
+* Exploring even more variables. In general, it can be noted that bot data tend to be clusterd at certain extreme values. These are good indications that selected predictors can potentially have strong predictive power to determine automated bot users.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_3.png)
 
