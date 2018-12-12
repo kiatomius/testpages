@@ -10,7 +10,6 @@ nav_include: 3
 A simple decision tree classifier model with maximum depth = 3 is devised as the starting point.
 
 ```python
-
 decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
 decision_model.fit(X_train, y_train)
 
@@ -49,12 +48,9 @@ bagging_model = BaggingClassifier(DecisionTreeClassifier(criterion='gini', split
 bagging_model.fit(X_train, y_train)
 
 y_pred_train_bag = bagging_model.predict(X_train)
-
 y_pred_test_1_bag = bagging_model.predict(X_test_1)
 y_pred_test_3_bag = bagging_model.predict(X_test_3)
-
 train_score_bag = accuracy_score(y_train, y_pred_train_bag) * 100
-
 test_score_1_bag = accuracy_score(y_test_1, y_pred_test_1_bag) * 100
 test_score_3_bag = accuracy_score(y_test_3, y_pred_test_3_bag) * 100
 ```
@@ -89,7 +85,6 @@ test_staged_score_1_ada = list(ada_model.staged_score(X_test_1, y_test_1))
 test_staged_score_3_ada = list(ada_model.staged_score(X_test_3, y_test_3))
 ```
 ### 3.2 Results
-
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #1 is 88.04238143289606%
     accuracy score of the test set with social spambot #3 is 52.90948275862068%
@@ -139,19 +134,7 @@ Significant improvement in the accuracy score for both test sets were seen, exce
 ```python
 pd.Series(rf_model.feature_importances_,index=list(X_train)).sort_values().plot(kind="barh")
 ```
-
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x195ea451e48>
-
-
-
-
 ![png](Main_Model_files/Main_Model_30_1.png)
-
-
 
 ## 5. Multinominal Regression
 
@@ -159,8 +142,6 @@ pd.Series(rf_model.feature_importances_,index=list(X_train)).sort_values().plot(
 In addition to the decision tree based classification models, we will also run traditional multinominal logistic regression models to test their classification performance.
 
 ```python
-# Multinominal Logistic Regression
-
 log_model = LogisticRegressionCV(fit_intercept=True, cv=5, multi_class="ovr", penalty='l2', max_iter=10000)
 log_model.fit(X_train, y_train.values.reshape(-1))
 
@@ -175,7 +156,6 @@ test_score_1_log = accuracy_score(y_test_1, y_pred_test_1_log) * 100
 test_score_3_log = accuracy_score(y_test_3, y_pred_test_3_log) * 100
 ```
 ### 5.2 Results
-
     accuracy score of the training set is 97.55%
     accuracy score of the test set with social spambot #1 is 69.02119071644803%
     accuracy score of the test set with social spambot #3 is 51.724137931034484%
@@ -189,8 +169,6 @@ We will finally run K-Nearest neighbour classification model to check its perfor
 We first normalize the training and testing data to allow this modelling.
 
 ```python
-# K Nearest Neighbours
-
 def normalize (df):
     con_var = ['followers_count', 'listed_count', 'friends_count', 'favourites_count', 'statuses_count']
 
@@ -207,7 +185,6 @@ X_test_3_norm = normalize(X_test_3)
 ```
 
 ### 6.2 Exploring different depths
-
 ```python
 kvals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 50]
 knn_score_train = []
@@ -224,7 +201,6 @@ ax.set_title("Train Set Score")
 ax.set_xlabel("kvals")
 ax.set_ylabel("Mean Accuracy Score")
 ```
-
 ![png](Main_Model_files/Main_Model_33_1.png)
 
 From above analysis, we determine that k=3 produces optimal trainig score.

@@ -1,5 +1,5 @@
 ---
-title: Models (inc. text)
+title: Improved models
 notebook: EDA_Dec_2.ipynb
 nav_include: 4
 ---
