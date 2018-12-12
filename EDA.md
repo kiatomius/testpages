@@ -225,7 +225,7 @@ Some of the key defined objects are as follows:
 ![png](EDA_Dec_2_files/EDA_Dec_2_11_2.png)
 
 **status_count vs followers_couint**
-* It is also worth noting that across certain variables, such as presented hereby (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
+* Exploration with additional variables. In general, it can be noted that bot data tend to be clusterd at certain extreme values. These are good indications that selected predictors can potentially have strong predictive power to determine automated bot users.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_11_3.png)
 
