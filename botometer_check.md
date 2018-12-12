@@ -47,21 +47,14 @@ Given the time constraints presented by the verification process for Botometer A
 ## Botometer Score
 ![png](botometer_check_files/botometer_check_13_1.png)
 
+As shown above, Botometer had detected ALL of the 1000 tweets/users as highly likely to be human, with even the highest score at below 1 (out of 5). Breakdown of scores are also shown below.
 
-
-
+## Breakdown of scores
 ![png](botometer_check_files/botometer_check_14_1.png)
-
-
-
-
-
 ![png](botometer_check_files/botometer_check_15_1.png)
 
+The breakdown does show that some users scored highly on certain parameters to be highly likely to be bots, but considered as a whole, they were deemed unlikely to be bots.
 
-
-
-```python
-
-```
+## 2. Further Scope
+This result unfortuantely prevented us from going forward, as we could not generate sufficient 'bot' datasets to test the performance of our models. The clear next step forward for our project would be increase the sample size of current tweets, generate sufficient number of bots through reliable third-party sources such as botometer, and test our best performing model in predicting the automated bots.
 
