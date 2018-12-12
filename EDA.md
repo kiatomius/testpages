@@ -229,15 +229,21 @@ Some of the key defined objects are as follows:
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_3.png)
 
-* There are a couple of important observations to glean from this. First, it supplements the observations on friends_count, followers_count and listed_count made above. Second, the behavior of bots is starkly different from humans in favourites_counts and statuses_count. Bots mark nearly zero statuses as favorite and bots don’t tweet as well. 
+### 3.2 Closer exploration of individual predictors:
 
-* We do a further breakdown of the five parameters for both, bot and human, to understand  how bots operate in the twitter space. 
+Now we investigate the distribution of individual predictors in order to closer analyze the difference between human users and automated bots.
+
+**Friends_Count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_13_1.png)
-* This gives detailed information of how friends of bots differ from friends of humans. 
 
+* It can be noted from here that distribution of human friends_count tend to spike at around a few hundred, and naturally decline thereafter, whereas for bots, distribution also seem to spike at around few hundread, but there is another spike at around 2000 which we also saw in earlier analysis. The second spike may be a result of bots' artificial designs to register as many friends as possible for various manipulation purposes, but with a threshold set at certain limit at around 2000. The second spike could be a trend in aiding us to detect the automated bots. 
+
+**followers_count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_14_1.png)
+
+* This predictor has relatively similar distribution between humans and bots, making it possibily difficult to act as a powerful predictor, at least not on its own.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
 
