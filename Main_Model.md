@@ -226,3 +226,25 @@ test_score_3_knn = accuracy_score(y_test_3, y_pred_test_3_knn) * 100
     accuracy score of the test set with social spambot #3 is 67.24137931034483%
 
 We learnt that K-Nearest neighbour model performs reasonably well for both test sets, however also fall short of some of the superior performing models such as Random Forest.    
+
+
+## 7. Summary
+
+### 7.1 Comparison of model performance
+
+| Model               | Train score | Test score #1 | Test score #3 |
+|---------------------|-------------|---------------|---------------|
+| Decision Tree       | 98.9%       | 69.9%         | 77.7%         |
+| Bagging             | 100%        | 84.8%         | 54.4%         |
+| Boosting            | 100%        | 88.0%         | 52.9%         |
+| Random Forest       | 100%        | 84.1%         | 77.5%         |
+| Logistic Regression | 97.6%       | 69.0%         | 51.7%         |
+| KNN                 | 97.6%       | 64.4%         | 67.2%         |
+
+* As the above chart shows, Random Forest model had the highest accuracy score for both testing sets, indicating the high predictive power as well as the robustness of its performance across different types of automates bots. 
+* By separating the results between two test scores, Boosting performed best for Test Score #1, while Decision Tree with depth=3 performed best for Test score #3. While the margins of their respective performance over Random Forest are narrow, this indicates that it could be optimal to choose different models to predict certain types of automated bots.
+* We have managed to achieve our initial target of beating the testing scores for Yang. et al for both testing sets. We have also beat BotOrNot? for Testing Set #1, but fell short of their performance for Testing Set #3, indicating further scope for improvement.
+
+### 7.2 Further Scopes
+* We have thus far relied mainly on _user data_ to detect automated twitter bots, basing our approach on tools proposed by various researchers. There are, however, another large field of twitter bot detection research, that are based on the analysis of tweets (instead of users).
+* We believe that this field constitutes an important part in our research, and sought to further improve our model performance, with results presented in the following chapters. 
