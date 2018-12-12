@@ -1,8 +1,82 @@
 ---
-title: Improved models
+title: Text Analysis
 notebook: EDA_Dec_2.ipynb
 nav_include: 4
 ---
+
+## 1. Sentimental Analysis
+* After exploring various text analysis methodolgies available in the literature, we selected Sentimental Analysis via Python package names TextBlob to generate additional predictors based on text analysis.
+* TextBlob analyzes the texts contained in a sentense (ideal for tweet analysis) and give two scores for the sentence: (i) polarity and (ii) subjectivity. Both variables range between -1 and 1, indicating the positivity/negativity of each factor.
+* At this stage, we have eliminated Test Set #1 from Social Spambots #1, since more than 99% of tweets are in Italian (as the data was sampled in relation to an Italian election), and Textblob is only able to analyze English tweets.
+
+## 1.1 Obtaining the sentiment score
+We apply a standard methodology available in the literature for obtaining the sentiment score.
+
+```python
+def clean_tweet(tweet): 
+    if pd.isnull(tweet):
+        return 'neutral'
+    else:
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
+def get_tweet_sentiment(tweet): 
+    ''' 
+    Utility function to classify sentiment of passed tweet 
+    using textblob's sentiment method 
+    '''
+    # create TextBlob object of passed tweet text 
+    analysis = TextBlob(clean_tweet(tweet)) 
+    # set sentiment 
+    if analysis.sentiment.polarity > 0: 
+        return 'positive'
+    elif analysis.sentiment.polarity == 0: 
+        return 'neutral'
+    else: 
+        return 'negative'
+    
+def get_score(tweet): 
+
+    # create TextBlob object of passed tweet text 
+    analysis = TextBlob(clean_tweet(tweet)) 
+    # set sentiment 
+    return analysis.sentiment.polarity, analysis.sentiment.subjectivity
+```
+
+## 1.2 Analyzing the sentiments between human tweets and bot tweets.
+
+```python
+fig, ax = plt.subplots(1,1, figsize =(10,5))
+
+ax.plot(gen_sent['polarity'].values, gen_sent['subjectivity'].values, 'o', markersize = 0.5, alpha = 0.3, label = 'genuine')
+ax.plot(trad_bot1_sent['polarity'].values, trad_bot1_sent['subjectivity'].values, 'o', markersize = 0.7, alpha = 0.3, label ='traditional bots')
+ax.set_xlabel('polarity')
+ax.set_ylabel('subjectivity')
+ax.set_title('Twitter sentiment analysis')
+ax.legend()
+```
+![png](Sentiment_Data_files/Sentiment_Data_10_1.png)
+
+```python
+fig, ax = plt.subplots(1,1, figsize =(10,5))
+
+ax.plot(gen_sent['polarity'].values, gen_sent['subjectivity'].values, 'o', markersize = 0.5, alpha = 0.3, label = 'genuine')
+ax.plot(ss_bot3_sent['polarity'].values, ss_bot3_sent['subjectivity'].values, 'o', markersize = 0.7, alpha = 0.3, label ='socail spambots 3')
+ax.set_xlabel('polarity')
+ax.set_ylabel('subjectivity')
+ax.set_title('Twitter sentiment analysis')
+ax.legend()
+```
+![png](Sentiment_Data_files/Sentiment_Data_11_1.png)
+
+* It appears sentimental scores for human and bot tweets are spread out across the spectrum, with no clear separation between the two types. However, some clustering of bot data can be observed for both sample sets, in the positive polarity area. These may become interesting additional predictors.
+
+## 2. 
+
+
+```python
+
+```
+
 
 
 ```python
