@@ -19,14 +19,14 @@ Using the dataset presented by Cresci-2017, we devised a number of classificatio
 
 ### 1.2 Prediction based on User Data + Text
 
-| Model               | Train score | Test score #1 | Test score #3 |
-|---------------------|-------------|---------------|---------------|
-| Decision Tree       | XXX%        | NA            | 77.7%         |
-| Bagging             | XXX%        | NA            | 54.4%         |
-| Boosting            | XXX%        | NA            | 52.9%         |
-| Random Forest       | XXX%        | NA            | 77.5%         |
-| Logistic Regression | XXX%        | NA            | 51.7%         |
-| KNN                 | XXX%        | NA            | 67.2%         |
+| Model               | Test score #3(dropNaN) | Test score #3(linear imputation) |
+|---------------------|---------------|---------------|
+| Decision Tree       | 95.1%         | 49.0%         |
+| Bagging             | 95.1%         | 94.1%         |
+| Boosting            | 95.1%         | 82.4%         |
+| Random Forest       | 96.7%         | 83.2%         |
+| Logistic Regression | 95.6%         | 95.7%         |
+| KNN                 | 91.2%         | 92.9%         |
 
 
 ### 1.3 Summary & Thoughts

@@ -98,7 +98,7 @@ X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 ```
 
 ### 2.2. Results
-The model we used is same as the one we used in our Main model.
+The model we used is same as the one we used in our Main model with the added predictors of text/sentiment analysis.
 ### 2.2.1 Decision Tree
 
     accuracy score of the training set is 100.0%
@@ -214,6 +214,7 @@ X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 ```
 
 ### 3.2 Results
+The model we used is same as the one we used in our Main model with the added predictors of text/sentiment analysis.
 ### 3.2.1 Decision Tree
 
     accuracy score of the training set is 100.0%
@@ -266,5 +267,7 @@ X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 
 * We were able to obtain higher test scores in general with our combined dataset with sentiment and text features. The highest test score was 96.7% with Random Forest model from the dataset which dropped missing data. 
 * By employing Random Forest, we found that the important features to detect bots are faviorite count both per tweet and user, and status count. Subjectivity from the sensitive analysis contributed as well. However, the significance of coefficient of missingness made us suspicious about the randomness of missing data.
+
 ![png](model_withsentiment_final_files/bias_missingness.png)
-* Above figure shows that there is a clear separation between data with missing data and data without missing data in terms of favourite count (one of the most important feature). Thus, we cannot deny the fact that dropping or imputing missing data creates bias in our model.
+
+* Above figure shows that there is a clear separation between data with missing data and data without missing data in terms of favourite count (one of the most important feature). Thus, we cannot deny the fact that dropping or imputing missing data *creates bias* in our model.
