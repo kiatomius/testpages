@@ -1,3 +1,13 @@
+---
+title: Further Scope
+notebook: botometer_check.ipynb
+nav_include: 6
+---
+
+
+<p align="left">
+  <img src="index_files/brexit.pgn" alt="brexit" width="500"/>
+</p>
 
 
 
