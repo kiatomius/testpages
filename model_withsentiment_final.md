@@ -1,4 +1,8 @@
-
+---
+title: Models (inc. text)
+notebook: EDA_Dec_2.ipynb
+nav_include: 4
+---
 
 
 ```python
