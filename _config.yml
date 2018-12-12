@@ -1,6 +1,6 @@
 theme: jekyll-theme-primer
-title: Twitter Bot Detection
-description: Twitter Bot Detection
+title: Overviws
+description: Overview
 baseurl:
 markdown: kramdown
 kramdown:
