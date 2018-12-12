@@ -32,6 +32,8 @@ Our general approach and objective may be summarized as follows:
 * Seek to achieve accuracy score by incorporating text analysis
 * Evaluate our methodologies and identify future scopes
 
+We would like thank the members of CS109 faculty, and also pay a very special thanks to our team TA who provided us with valuable guidance throughout the research process.
+
 ***
 
 _team Github page (<https://github.com/motoakisumi>)_  
