@@ -196,13 +196,13 @@ After cleaning the data, we explored the data for several predictors to gain bas
 Full list of deinitions of user object on twitter can be found in the following URL. <https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object.html>  
 Some of the key defined objects are as follows:
 
-* __**location**__: The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable. This field will occasionally be fuzzily interpreted by the Search service. Example: "location": "San Francisco, CA"
-* __**description**__: The user-defined UTF-8 string describing their account. Example: "description": "The Real Twitter API."
-* __**verified**__: When true, indicates that the user has a verified account. See Verified Accounts . Example: "verified": false
-* __**followers_count**__: The number of followers this account currently has. Under certain conditions of duress, this field will temporarily indicate “0”. Example: "followers_count": 21
-* __**friends_count**__: The number of users this account is following (AKA their “followings”). Under certain conditions of duress, this field will temporarily indicate “0”. Example: "friends_count": 32
-* __**listed_count**__: The number of public lists that this user is a member of. Example: "listed_count": 9274
-* __**favourites_count**__:The number of Tweets this user has liked in the account’s lifetime. British spelling used in the field name for historical reasons. Example: "favourites_count": 13
+* __location__: The user-defined location for this account’s profile. Not necessarily a location, nor machine-parseable. This field will occasionally be fuzzily interpreted by the Search service. Example: "location": "San Francisco, CA"
+* __description__: The user-defined UTF-8 string describing their account. Example: "description": "The Real Twitter API."
+* __verified__: When true, indicates that the user has a verified account. See Verified Accounts . Example: "verified": false
+* __followers_count__: The number of followers this account currently has. Under certain conditions of duress, this field will temporarily indicate “0”. Example: "followers_count": 21
+* __friends_count__: The number of users this account is following (AKA their “followings”). Under certain conditions of duress, this field will temporarily indicate “0”. Example: "friends_count": 32
+* __listed_count__: The number of public lists that this user is a member of. Example: "listed_count": 9274
+* __favourites_count__:The number of Tweets this user has liked in the account’s lifetime. British spelling used in the field name for historical reasons. Example: "favourites_count": 13
 
 ### 3.1 Friends_Count, Followers_count, listed_count
 
