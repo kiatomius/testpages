@@ -44,7 +44,7 @@ Given the time constraints presented by the verification process for Botometer A
 
 ## Botometer Score
 ![png](botometer_check_files/botometer_check_13_1.png)
-(english score refers to overall score including text-analysis. Universal score excludes text analysis)
+(english score refers to overall score including text-analysis. Universal score excludes text analysis)  
 
 As shown above, Botometer had detected ALL of the 1000 tweets/users as highly likely to be human, with even the highest score at below 1 (out of 5). Breakdown of scores are also shown below.
 
