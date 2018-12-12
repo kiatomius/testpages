@@ -8,14 +8,14 @@ We obtained the original dataset used in Cresci-2017 from Bot Repository[1]. The
  
 | Dataset                 | Description                                             | Accounts | Tweets  | Year |
 |-------------------------|---------------------------------------------------------|----------|---------|------|
-| genuine accounts        |  Verified accounts that are human operated              | 3474     | 8377522 | 2011 |
-| Social Spambots #1      | Retweeters of an Italian political candidate            | 991      | 1610176 | 2012 |
-| Social Spambots #2      | Spammers of paid apps for mobile devices                | 3457     | 428542  | 2014 |
-| Social Spambots #3      | Spammers of products on sale at Amazon.com              | 464      | 1418626 | 2011 |
-| Traditional Spambots #1 | Training set of spammers used by Yang et al             | 1000     | 145094  | 2009 |
-| Traditional Spambots #2 | Spammers of scam URLs                                   | 100      | 74957   | 2014 |
-| Traditional Spambots #3 | Automated accounts spamming job offers                  | 433      | 5794931 | 2013 |
-| Traditional Spambots #4 | Another group of automated accounts spamming job offers | 1128     | 133311  | 2009 |
+| **genuine accounts**        |  Verified accounts that are human operated              | 3474     | 8377522 | 2011 |
+| **Social Spambots #1**     | Retweeters of an Italian political candidate            | 991      | 1610176 | 2012 |
+| **Social Spambots #2**      | Spammers of paid apps for mobile devices                | 3457     | 428542  | 2014 |
+| **Social Spambots #3**      | Spammers of products on sale at Amazon.com              | 464      | 1418626 | 2011 |
+| **Traditional Spambots #1** | Training set of spammers used by Yang et al             | 1000     | 145094  | 2009 |
+| **Traditional Spambots #2** | Spammers of scam URLs                                   | 100      | 74957   | 2014 |
+| **Traditional Spambots #3** | Automated accounts spamming job offers                  | 433      | 5794931 | 2013 |
+| **Traditional Spambots #4** | Another group of automated accounts spamming job offers | 1128     | 133311  | 2009 |
 
 From here, we constructed the training & testing dataset in identical manner to those presented in the paper. The methodology behind the construction of the data is summarized in the below chart. In essence, it can be described as follows:
 * Training dataset is created by sampling 50% data of data from Genuine accounts, and 50% from **Traditional Spambots #1**.
@@ -202,29 +202,29 @@ Some of the key defined objects are as follows:
 * __followers_count__: The number of followers this account currently has. Under certain conditions of duress, this field will temporarily indicate “0”. Example: *21*
 * __friends_count__: The number of users this account is following (AKA their “followings”). Under certain conditions of duress, this field will temporarily indicate “0”. Example: *32*
 * __listed_count__: The number of public lists that this user is a member of. Example: "listed_count": *9274*
-* __favourites_count__:The number of Tweets this user has liked in the account’s lifetime. British spelling used in the field name for historical reasons. Example: *13*
+* __favourites_count__: The number of Tweets this user has liked in the account’s lifetime. British spelling used in the field name for historical reasons. Example: *13*
 
 ### 3.1 Exploring relationships between multiple varibles:
 
-**followers_couint vs friends_count**
+#### 3.1.1 **followers_couint vs friends_count**
 * A casual separation between the clustering of human-data and bot-data can be observed, with bots tending to have lower number of followers given friends count, while humans seem to have more even relationship between friends_count and followers_count.
 * It appears that bots may have tendency to focus on increasing friends_count over other metrics. This complements the theory on bots regarding bots existing primarily to tweet, re-tweet statuses which promote their agenda to their 'friends'. This behavior is different from humans as humans (in ideal world) use twitter as a medium of exchange of information and are interested in both receiving and sending tweets.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
-**listen_count vs friends_count**
+#### 3.1.2 **listen_count vs friends_count**
 * A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clearm since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of human.
 * One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
 
-**listed_count vs followers_couint**
+#### 3.1.3 **listed_count vs followers_couint**
 * It is also worth noting that across certain variables, such as presented hereby (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_2.png)
 
-**status_count vs followers_count**
+#### 3.1.4 **status_count vs followers_count**
 * Exploration with additional variables. In general, it can be noted that bot data tend to be clusterd at certain extreme values. These are good indications that selected predictors can potentially have strong predictive power to determine automated bot users.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_3.png)
