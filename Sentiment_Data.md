@@ -62,9 +62,6 @@ def get_score(tweet):
     return analysis.sentiment.polarity, analysis.sentiment.subjectivity
 ```
 
-
-
-
 ```python
 #generating sentiment score for traditional bot1
 
@@ -75,9 +72,6 @@ for i in range(len(df_trad_bot1_tweets)):
     x.append(get_score(df_trad_bot1_tweets['text'][i])[0])
     y.append(get_score(df_trad_bot1_tweets['text'][i])[1])
 ```
-
-
-
 
 ```python
 df_trad_bot1_tweets['polarity']=x

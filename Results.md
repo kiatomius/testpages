@@ -4,8 +4,9 @@ nav_include: 5
 ---
 
 ## 1. Results
+Using the dataset presented by Cresci-2017, we devised a number of classification models based on twitter user database, and we sought to improve the results by incorporating twitter/text analysis. The summary of the performance of our models are presented as below:
 
-### 1.1 User Model
+### 1.1 Prediction based on User Data
 
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
@@ -16,7 +17,7 @@ nav_include: 5
 | Logistic Regression | 97.6%       | 69.0%         | 51.7%         |
 | KNN                 | 97.6%       | 64.4%         | 67.2%         |
 
-### 1.2 User model with sentiment analysis
+### 1.2 Prediction based on User Data + Text
 
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
@@ -27,7 +28,17 @@ nav_include: 5
 | Logistic Regression | XXX%        | NA            | 51.7%         |
 | KNN                 | XXX%        | NA            | 67.2%         |
 
-## Conclusion & Future Work 
-A major challenge of predicting whether a user is bot or not is that there is no means to verify the ground truth. In our project we overcame this hurdle by taking the truth in the cresci paper (refernce in the literature review) as the true values. A couple of suggestions floated around in our discussions with the other teams and TF on ways to determine the ground truth: 
-i)	We could take random samples of twitter data and manually test it. We argued against it as we were unsure of our competency in distinguishing between the two. This is further supported by the data which notes that the accuracy of human annotators ranged from 69% to 82%. 
-ii)	We could use BotOrNot? which generates a score between 0 to 5, indicating the probability of whether a specific user account is automated twitter bot or not. Other than the fact that BotOrNot? is extremely time-taking, we also struggle with accuracy issues. The paper lists the accuracy of the software between 73% to 91%. 
+
+### 1.3 Summary & Thoughts
+We were able to achieve the target accuracy levels that we had originally set (based on Yang et al.). By combining our intial analysis with text analysis, we also obtain higher accurary levels, closer to those achieved by BotOrNot? (Botometer), even approaching the levels of unsupervised models that Cresci-2017 had tested. While we were pleased to achieve our initial targets, a number of questions arose that we were not fully able to comprehend at this time, and we wish to hereby state for future discussions.
+
+The first question that we faced was the unique way through which Cresci-2017 had constructed the training and testing dataset, where the 'bot' part of the data for training and testing set originate from completely different sources. We initially combined all sources of bot-data, shuffled them, and split them into training/testing sets,as just we approached this topic in CS109. However this approach resulted in inexplicably high testing accuracy score (consistently in 98-99% range), and we revised-back our approach to Cresci-2017 model in order to carry out apple-to-apple comparison against the relevant scores. While this turned out to be an enormously fruitful exercise, we were still not able to fully comprehend the flaws in our intial train-test split approach and how that produced such high scores.
+
+Another major question that remained was that a large number of users in Cresci-2017 dataset had no twitter data, therefore we were forced to drastically reduce the sample size for the text/sentiment analysis. We were not able to comprehend this situation, since it seems unusual that twitter data and user data were separately collected by the researchers in Cresci-2017. There is also a more troubling implication, that, the missingness of the twitter-data may not be random, and this may be causing significant biases to our models, in ways that would make them ineffective in predicting the 'real' twitter dataset.
+
+A final question which we faced was that, we did not understand why some of the accuracy scores presented in the literature were so low (Yang et. al 's 51% is almost as good as a coin-flip). This may not have stemmed from the inferior construction of their models, possibly due to sampling of the dataset upon which the models were trained and tested. While our performance was good, we may also fall into this trap, and this point require a careful evaluation. A sobering implication to derive from here may be that, correct sampling of twitter data is inherently difficult, as the true-population size of the twitter data is so exponentially large, and however hard we seek to devise optimal models, they would be biased towards the data that they were trained on. 
+
+Our attempt to make a progress upon this concluding thought is presented in the following Future Scope section.
+
+### Thoughts on twitter
+* **Humans are not good at detecting bots!** You may assume that you can verify whether a tweet is generated by bot or not. Not so fast! Cresci-2017 shows that accuracy of human annotators range from 69% to 82%. Establishing the 'ground truth' is not as easy as we might think! But then, how else do we establish the ground truth? Twitter has 'verified' column which ensures that account is from a verified human-being. We had high hopes that this will become a powerful predictor but it turned out that hardly anyone is verified! Maybe it's time for twitter to change its registration process?
