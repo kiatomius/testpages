@@ -155,6 +155,7 @@ def default_image_check (df):
     
     return default_profile_image
 ```
+### 2.3 Further narrowing down predictors and applying abovedefined cleaning function
 
 ```python
 def master_clean (df):
