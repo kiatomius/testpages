@@ -55,5 +55,5 @@ As shown above, Botometer had detected ALL of the 1000 tweets/users as highly li
 The breakdown does show that some users scored highly on certain parameters to be highly likely to be bots, but considered as a whole, they were deemed unlikely to be bots.
 
 ## 2. Further Scope
-This result unfortuantely prevented us from going forward, as we could not generate sufficient 'bot' datasets to test the performance of our models. The clear next step forward for our project would be increase the sample size of current tweets, generate sufficient number of bots through reliable third-party sources such as botometer, and test our best performing model in predicting the automated bots.
+This result unfortunately prevented us from going forward, as we could not generate sufficient 'bot' datasets to test the performance of our models. The clear next step forward for our project would be increase the sample size of current tweets, generate sufficient number of bots through reliable third-party sources such as botometer, and test our best performing model in predicting the automated bots.
 
