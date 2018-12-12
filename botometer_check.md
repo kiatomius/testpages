@@ -20,8 +20,6 @@ The sample size was intentionally selected to 2000 as Botometer API had a daily 
 ### 1.2 Botometer API
 Botometer API provides identical results to those available on their website, utlimately providing a score for each **user** between 0 to 5, 0 being most human, 5 being least human. Anything above 2.5 may be considered as a bot. Botometer also provides a breakdown of scores that they incorporated to reach the final score, such as 'english' (text analysis), 'friends', 'network', 'sentiments' etc, not dissimilar to our modelling approach. An example of Botometer API output is shown below.
 
-```python
-```
     {'cap': {'english': 0.0038317559975942547, 'universal': 0.004725361816828223},
      'categories': {'content': 0.19935698741177266,
       'friend': 0.1594575816736603,
@@ -46,6 +44,7 @@ Given the time constraints presented by the verification process for Botometer A
 
 ## Botometer Score
 ![png](botometer_check_files/botometer_check_13_1.png)
+(english score refers to overall score including text-analysis. Universal score excludes text analysis)  
 
 As shown above, Botometer had detected ALL of the 1000 tweets/users as highly likely to be human, with even the highest score at below 1 (out of 5). Breakdown of scores are also shown below.
 
