@@ -1,15 +1,706 @@
----
-title: Models
-notebook: Main_Model.ipynb
-nav_include: 3
----
 
-## 1. Stimple Decision Tree
 
-* A simple desicion tree model with depth set at 3
 
-### 1.1 Tuning and fitting the model
 ```python
+import json
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import os
+import re 
+import seaborn as sns
+
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import KFold
+from sklearn.metrics import accuracy_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import export_graphviz
+from sklearn.pipeline import make_pipeline
+from sklearn.datasets import make_blobs
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import GridSearchCV
+
+from sklearn.model_selection import cross_val_score
+from sklearn.utils import resample
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.metrics import accuracy_score
+
+from sklearn.utils import shuffle
+```
+
+
+
+
+```python
+os.getcwd()
+pd.set_option('display.max_columns', 100)
+```
+
+
+
+
+```python
+#download data for genuine users
+
+df_gen_users = pd.read_csv('datasets_full.csv/genuine_accounts.csv/users.csv')
+
+#define columns to keep for investigation
+
+columns_to_keep = ['id', 'name', 'screen_name', 'statuses_count', 'followers_count',
+       'friends_count', 'favourites_count', 'listed_count', 'url', 'lang',
+       'time_zone', 'location', 'default_profile', 'default_profile_image',
+       'geo_enabled', 'profile_image_url', 'profile_banner_url',
+       'profile_use_background_image', 'profile_background_image_url_https',
+       'profile_text_color', 'profile_image_url_https','follow_request_sent', 
+       'verified','description', 'following']
+
+# trim the bot data and add a binary column = 1 to indicate that this data is human data
+
+df_gen_users = df_gen_users[columns_to_keep]
+df_gen_users['bot'] = 0
+```
+
+
+
+
+```python
+# download data for traditional bots for training purpose
+# use trad_bot_1 since it was the main focus of the 'traditional model'
+
+df_trad_bot1_users = pd.read_csv('datasets_full.csv/traditional_spambots_1.csv/users.csv')
+
+# trim the bot data and add a binary column = 1 to indicate that this data is bot data
+df_trad_bot1_users = df_trad_bot1_users[columns_to_keep]
+df_trad_bot1_users['bot'] = 1
+```
+
+
+
+
+```python
+# split the genuine data into training set and test set to avoid overlap
+
+df_gen_train, df_gen_test = train_test_split(df_gen_users, test_size = 0.5, shuffle = True)
+```
+
+
+
+
+```python
+#create training dataset by concatenating the training split of genuine data and trad_bot_1 data
+
+df_train = pd.concat([df_gen_train.sample(len(df_trad_bot1_users)), df_trad_bot1_users])
+df_train = shuffle(df_train)
+```
+
+
+
+
+```python
+# Create the test set
+# Use social spambots #1 and social spambots #3 as two separate test data set
+
+df_test_bot1_users = pd.read_csv('datasets_full.csv/social_spambots_1.csv/users.csv')
+df_test_bot3_users = pd.read_csv('datasets_full.csv/social_spambots_3.csv/users.csv')
+
+df_test_bot1_users = df_test_bot1_users[columns_to_keep]
+df_test_bot1_users['bot'] = 1
+
+df_test_bot3_users = df_test_bot3_users[columns_to_keep]
+df_test_bot3_users['bot'] = 1
+
+#create test set with 50% genuine data, and 50% social spambot data
+
+df_test_1 = pd.concat([df_gen_test.sample(len(df_test_bot1_users), random_state= 1), df_test_bot1_users])
+df_test_3 = pd.concat([df_gen_test.sample(len(df_test_bot3_users), random_state= 1), df_test_bot3_users])
+
+df_test_1 = shuffle(df_test_1)
+df_test_3 = shuffle(df_test_3)
+```
+
+
+
+
+```python
+#define data cleaning functions
+
+#cleaning step 1: check if screen_name has a word 'bot' in it
+
+def screen_name_check (df):
+    
+    word = 'bot'
+    bot_name = []
+    k = 0
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['screen_name']):
+                k = 0
+        else: 
+            if word in df.iloc[i,:]['screen_name']:
+                k = 1
+            else:
+                k = 0
+        bot_name.append(k)
+    
+    return bot_name
+
+
+#cleaning step 2: check if location parameter is present
+
+def location_check(df):
+    
+    loc = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['location']):
+            loc.append(0)
+        else:
+            loc.append(1)
+            
+    return loc
+
+# cleaning step 3
+# Set description to 1 if it contains either of these words: 
+#‘bot’, ‘robot’, ‘artificial’, ‘intelligence’, ‘neural’, ‘network’, ‘automatic’ and 0 otherwise.
+
+def description_check(df):
+    keyword = ['bot', 'robot', 'artificial', 'intelligence', 'neural', 'network', 'automatic']
+    bot_des = []
+    k = 0
+
+    for i in range (len(df)):
+        for keyword in keyword:
+            if pd.isnull(df.iloc[i,:]['description']):
+                k = 0
+            else:
+                if df.iloc[i,:]['description'].find(keyword) == -1:
+                    k = 0
+                else:
+                    k = 1
+        bot_des.append(k)
+        
+    return bot_des
+
+#cleaning step 4:
+#Set verified to 1 if the sample’s verified features contents are True and 0 otherwise.
+
+def verified_check(df):
+    ver = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['verified']):
+            ver.append(0)
+        else:
+            ver.append(1)
+    return ver
+
+#cleaning step 5:
+#Check if default profile exists or not.
+
+def default_profile_check (df):
+    
+    default_profile = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['default_profile']):
+            default_profile.append(0)
+        else:
+            default_profile.append(1)
+    
+    return default_profile
+
+#cleaning step 6:
+#Check if default profile image is used or not.
+
+def default_image_check (df):
+    
+    default_profile_image = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['default_profile_image']):
+            default_profile_image.append(0)
+        else:
+            default_profile_image.append(1)
+    
+    return default_profile_image
+```
+
+
+
+
+```python
+def master_clean (df):
+    bot_name = screen_name_check (df)
+    loc = location_check (df)
+    bot_des = description_check (df)
+    ver = verified_check (df)
+    default_profile = default_profile_check (df)
+    default_profile_image = default_image_check (df)
+    
+    df = pd.DataFrame({'screen_name': df['screen_name'],
+                       'name': df['name'],
+                       'id': df['id'],
+                       'bot_in_name':bot_name,
+                       'bot_in_des':bot_des,
+                       'location': loc,
+                       'verified': ver,
+                       'default_profile': default_profile,
+                       'default_profile_image': default_profile_image,
+                       'followers_count': df['followers_count'],
+                       'listed_count': df['listed_count'],
+                       'friends_count': df['friends_count'],
+                       'favourites_count': df['favourites_count'],
+                       'statuses_count': df['statuses_count'],
+                       'bot_or_not':df['bot']
+                       })
+    
+    return df
+```
+
+
+
+
+```python
+#apply the cleaning function to training set and testing set
+
+df_train = master_clean(df_train)
+df_test_1 = master_clean(df_test_1)
+df_test_3 = master_clean(df_test_3)
+```
+
+
+
+
+```python
+#explore training dataset
+
+df = df_train
+
+fig, ax = plt.subplots(1,2, figsize = (15, 5))
+alpha = 0.3
+markersize = 1
+
+ax[0].plot(df[df['bot_or_not']==1]['followers_count'],
+         df[df['bot_or_not']==1]['friends_count'],
+         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
+
+ax[0].plot(df[df['bot_or_not']==0]['followers_count'],
+         df[df['bot_or_not']==0]['friends_count'],
+         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
+ax[0].set_xlabel('followers_count')
+ax[0].set_ylabel('friends_count')
+ax[0].set_xlim((0, 10000))
+ax[0].set_ylim((0, 10000))
+ax[0].set_title('followers_count vs friends_count (all data)')
+ax[0].legend()
+
+
+ax[1].plot(df[df['bot_or_not']==1]['followers_count'],
+         df[df['bot_or_not']==1]['friends_count'],
+         'o', color = 'red', markersize = 5, alpha = alpha, label = 'bot')
+
+ax[1].plot(df[df['bot_or_not']==0]['followers_count'],
+         df[df['bot_or_not']==0]['friends_count'],
+         'o', color = 'blue',markersize = 5, alpha = alpha, label = 'human')
+ax[1].set_xlabel('followers_count')
+ax[1].set_ylabel('friends_count')
+ax[1].set_xlim((0, 2000))
+ax[1].set_ylim((0, 2500))
+ax[1].set_title('followers_count vs friends_count (magnified)')
+ax[1].legend()
+```
+
+
+
+
+
+    <matplotlib.legend.Legend at 0x195eec17240>
+
+
+
+
+![png](Main_Model_files/Main_Model_10_1.png)
+
+
+
+
+```python
+df = df_train
+
+fig, ax = plt.subplots(1,2, figsize = (15, 5))
+alpha = 0.3
+markersize = 1
+
+ax[0].plot(df[df['bot_or_not']==1]['listed_count'],
+         df[df['bot_or_not']==1]['friends_count'],
+         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
+
+ax[0].plot(df[df['bot_or_not']==0]['listed_count'],
+         df[df['bot_or_not']==0]['friends_count'],
+         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
+ax[0].set_xlabel('listed_count')
+ax[0].set_ylabel('friends_count')
+ax[0].set_xlim((0, 200))
+ax[0].set_ylim((0, 8000))
+ax[0].set_title('listed_count vs friends_count (all data)')
+ax[0].legend()
+
+
+ax[1].plot(df[df['bot_or_not']==1]['listed_count'],
+         df[df['bot_or_not']==1]['friends_count'],
+         'o', color = 'red', markersize = 5, alpha = alpha, label = 'bot')
+
+ax[1].plot(df[df['bot_or_not']==0]['listed_count'],
+         df[df['bot_or_not']==0]['friends_count'],
+         'o', color = 'blue',markersize = 5, alpha = alpha, label = 'human')
+ax[1].set_xlabel('listed_count')
+ax[1].set_ylabel('friends_count')
+ax[1].set_xlim((0, 50))
+ax[1].set_ylim((0, 2000))
+ax[1].set_title('listed_count vs friends_count (magnified)')
+ax[1].legend()
+```
+
+
+
+
+
+    <matplotlib.legend.Legend at 0x195efb83320>
+
+
+
+
+![png](Main_Model_files/Main_Model_11_1.png)
+
+
+
+
+```python
+df = df_train
+var1 = 'listed_count'
+var2 = 'followers_count'
+
+fig, ax = plt.subplots(1,2, figsize = (15, 5))
+alpha = 0.3
+markersize = 2
+
+ax[0].plot(df[df['bot_or_not']==1][var1],
+         df[df['bot_or_not']==1][var2],
+         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
+
+ax[0].plot(df[df['bot_or_not']==0][var1],
+         df[df['bot_or_not']==0][var2],
+         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
+ax[0].set_xlabel(var1)
+ax[0].set_ylabel(var2)
+ax[0].set_xlim((0, 200))
+ax[0].set_ylim((0, 10000))
+ax[0].set_title('')
+ax[0].set_title('listed_count vs followers_count')
+ax[0].legend()
+
+ax[1].plot(df[df['bot_or_not']==1][var1],
+         df[df['bot_or_not']==1][var2],
+         'o', color = 'red', markersize = 5, alpha = alpha, label = 'bot')
+
+ax[1].plot(df[df['bot_or_not']==0][var1],
+         df[df['bot_or_not']==0][var2],
+         'o', color = 'blue',markersize = 5, alpha = alpha, label = 'human')
+ax[1].set_xlabel(var1)
+ax[1].set_ylabel(var2)
+ax[1].set_xlim((0, 50))
+ax[1].set_ylim((0, 2000))
+ax[1].set_title('')
+ax[1].set_title('listed_count vs followers_count (magnified)')
+ax[1].legend()
+```
+
+
+
+
+
+    <matplotlib.legend.Legend at 0x195f3973b38>
+
+
+
+
+![png](Main_Model_files/Main_Model_12_1.png)
+
+
+
+
+```python
+df = df_train
+var1 = 'statuses_count'
+var2 = 'followers_count'
+
+fig, ax = plt.subplots(1,2, figsize = (15, 5))
+alpha = 0.3
+markersize = 2
+
+ax[0].plot(df[df['bot_or_not']==1][var1],
+         df[df['bot_or_not']==1][var2],
+         'o', color = 'red', markersize = markersize, alpha = alpha, label = 'bot')
+
+ax[0].plot(df[df['bot_or_not']==0][var1],
+         df[df['bot_or_not']==0][var2],
+         'o', color = 'blue',markersize = markersize, alpha = alpha, label = 'human')
+ax[0].set_xlabel(var1)
+ax[0].set_ylabel(var2)
+ax[0].set_xlim()
+ax[0].set_ylim()
+ax[0].set_title('')
+ax[0].set_title('statuses_count vs followers_count')
+ax[0].legend()
+
+ax[1].plot(df[df['bot_or_not']==1][var1],
+         df[df['bot_or_not']==1][var2],
+         'o', color = 'red', markersize = 5, alpha = alpha, label = 'bot')
+
+ax[1].plot(df[df['bot_or_not']==0][var1],
+         df[df['bot_or_not']==0][var2],
+         'o', color = 'blue',markersize = 5, alpha = alpha, label = 'human')
+ax[1].set_xlabel(var1)
+ax[1].set_ylabel(var2)
+ax[1].set_xlim((0, 80000))
+ax[1].set_ylim((0, 2000))
+ax[1].set_title('')
+ax[1].set_title('statuses_count vs followers_count (magnified)')
+ax[1].legend()
+```
+
+
+
+
+
+    <matplotlib.legend.Legend at 0x195f434efd0>
+
+
+
+
+![png](Main_Model_files/Main_Model_13_1.png)
+
+
+
+
+```python
+df = df_train
+
+fig, ax = plt.subplots(1,2, figsize = (10, 3))
+size = 0.5
+alpha = 0.5
+
+var1 = 'favourites_count'
+
+ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
+           bins =np.arange(0, 10, 1))
+
+ax[0].legend()
+
+ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
+          bins = np.arange(0, 10000, 100))
+ax[1].legend()
+
+ax[0].set_title(var1)
+ax[1].set_title(var1)
+```
+
+
+
+
+
+    Text(0.5,1,'favourites_count')
+
+
+
+
+![png](Main_Model_files/Main_Model_14_1.png)
+
+
+
+
+```python
+df = df_train
+
+fig, ax = plt.subplots(1,2, figsize = (10, 3))
+size = 0.5
+alpha = 0.5
+
+var2 = 'friends_count'
+
+ax[0].hist(df[df['bot_or_not']==1][var2],color = 'red',  alpha = alpha, label = 'bot',
+           bins =np.arange(0, 5000, 100))
+ax[0].legend()
+
+ax[1].hist(df[df['bot_or_not']==0][var2],color = 'blue', alpha = alpha, label = 'human',
+          bins = np.arange(0, 5000, 100))
+ax[1].legend()
+
+ax[0].set_title(var2)
+ax[1].set_title(var2)
+```
+
+
+
+
+
+    Text(0.5,1,'friends_count')
+
+
+
+
+![png](Main_Model_files/Main_Model_15_1.png)
+
+
+
+
+```python
+df = df_train
+
+
+fig, ax = plt.subplots(1,2, figsize = (10, 3))
+size = 0.5
+alpha = 0.5
+
+var1 = 'followers_count'
+
+ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
+           bins =np.arange(0, 4000, 100))
+
+ax[0].legend()
+ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
+          bins = np.arange(0, 4000, 100))
+ax[1].legend()
+
+ax[0].set_title(var1)
+ax[1].set_title(var1)
+```
+
+
+
+
+
+    Text(0.5,1,'followers_count')
+
+
+
+
+![png](Main_Model_files/Main_Model_16_1.png)
+
+
+
+
+```python
+df = df_train
+
+
+fig, ax = plt.subplots(1,2, figsize = (10, 3))
+size = 0.5
+alpha = 0.5
+
+var1 = 'listed_count'
+
+ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
+           bins =np.arange(0, 50, 1))
+
+ax[0].legend()
+ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
+          bins = np.arange(0, 50, 1))
+ax[1].legend()
+
+ax[0].set_title(var1)
+ax[1].set_title(var1)
+```
+
+
+
+
+
+    Text(0.5,1,'listed_count')
+
+
+
+
+![png](Main_Model_files/Main_Model_17_1.png)
+
+
+
+
+```python
+df = df_train
+
+fig, ax = plt.subplots(1,2, figsize = (10, 3))
+size = 0.5
+alpha = 0.5
+
+var1 = 'statuses_count'
+
+ax[0].hist(df[df['bot_or_not']==1][var1],color = 'red',  alpha = alpha, label = 'bot',
+           bins =np.arange(0, 200, 10))
+
+ax[0].legend()
+ax[1].hist(df[df['bot_or_not']==0][var1],color = 'blue', alpha = alpha, label = 'human',
+          bins = np.arange(0, 10000, 100))
+ax[1].legend()
+
+ax[0].set_title(var1)
+ax[1].set_title(var1)
+```
+
+
+
+
+
+    Text(0.5,1,'statuses_count')
+
+
+
+
+![png](Main_Model_files/Main_Model_18_1.png)
+
+
+
+
+```python
+#Prepare dataset to feed into the model
+
+# X_train from df_train
+X_train = df_train.drop(columns=['bot_or_not', 'screen_name', 'name', 'id'])
+
+# y_trian from df_train
+y_train = df_train[['bot_or_not']]
+
+# X_test_1 from df_test_1
+X_test_1 = df_test_1.drop(columns=['bot_or_not', 'screen_name', 'name', 'id'])
+
+# y_test_1 from df_test_1
+y_test_1 = df_test_1[['bot_or_not']]
+
+# X_test_3 from df_test_3
+X_test_3 = df_test_3.drop(columns=['bot_or_not', 'screen_name', 'name', 'id'])
+
+# y_test_3 from df_test_3
+y_test_3 = df_test_3[['bot_or_not']]
+```
+
+
+
+
+```python
+# Simple Decision Tree
+
 decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
 decision_model.fit(X_train, y_train)
 
@@ -23,12 +714,20 @@ train_score_dec = accuracy_score(y_train, y_pred_train_dec) * 100
 test_score_1_dec = accuracy_score(y_test_1, y_pred_test_1_dec) * 100
 test_score_3_dec = accuracy_score(y_test_3, y_pred_test_3_dec) * 100
 
+print('accuracy score of the training set is {}%'.format(train_score_dec))
+print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_dec))
+print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_dec))
+
 ```
+
+
     accuracy score of the training set is 98.9%
     accuracy score of the test set with social spambot #1 is 69.87891019172552%
     accuracy score of the test set with social spambot #3 is 77.69396551724138%
+    
 
-### 1.2 Exploring the test score with different depth
+
+
 ```python
 depth = np.arange(2,15,1)
 decision_score_mean=[]
