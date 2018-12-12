@@ -20,7 +20,7 @@ We obtained the original dataset used in Cresci-2017 from Bot Repository[1]. The
 From here, we constructed the training & testing dataset in identical manner to those presented in the paper. The methodology behind the construction of the data is summarized in the below chart. In essence, it can be described as follows:
 * Training dataset is created by sampling 50% data of data from Genuine accounts, and 50% from **Traditional Spambots #1**.
 * Testing dataset #1 is created by taking **all** data from Social Spambots #1, and equal number of samples from genuine accounts that were not used in creaging training dataset.
-* Testing dataset #2 is created by taking **all** data from Social Spambots #2, and equal number of samples from genuine accounts that were not used in creating training dataset.
+* Testing dataset #3 is created by taking **all** data from Social Spambots #3, and equal number of samples from genuine accounts that were not used in creating training dataset.
 
 <p align="center">
   <img src="index_files/data_split.png" alt="data_split" width="500"/>
