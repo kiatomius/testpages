@@ -136,7 +136,6 @@ oobs_score = rf_model.oob_score_
 Significant improvement in the accuracy score for both test sets were seen, exceeding our initial target levels, and also achieving the higher target levels achieved by Botometer.
 
 
-
 ```python
 pd.Series(rf_model.feature_importances_,index=list(X_train)).sort_values().plot(kind="barh")
 ```
@@ -154,6 +153,10 @@ pd.Series(rf_model.feature_importances_,index=list(X_train)).sort_values().plot(
 
 
 
+## 5. Multinominal Regression
+
+### 5.1 Designing the model
+In addition to the decision tree based classification models, we will also run traditional multinominal logistic regression models to test their classification performance.
 
 ```python
 # Multinominal Logistic Regression
@@ -170,19 +173,20 @@ train_score_log = accuracy_score(y_train, y_pred_train_log) * 100
 
 test_score_1_log = accuracy_score(y_test_1, y_pred_test_1_log) * 100
 test_score_3_log = accuracy_score(y_test_3, y_pred_test_3_log) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_log))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_log))
 ```
-
+### 5.2 Results
 
     accuracy score of the training set is 97.55%
     accuracy score of the test set with social spambot #1 is 69.02119071644803%
     accuracy score of the test set with social spambot #3 is 51.724137931034484%
     
+The performance of multinominal regression models fell short of decision tree based classificaiton models.
 
+## 6 K-Nearest Neighbour Model
 
+### 6.1 Designing the model
+We will finally run K-Nearest neighbour classification model to check its performance with a range of k-values.
+We first normalize the training and testing data to allow this modelling.
 
 ```python
 # K Nearest Neighbours
@@ -202,11 +206,10 @@ X_test_1_norm = normalize(X_test_1)
 X_test_3_norm = normalize(X_test_3)
 ```
 
-
-
+### 6.2 Exploring different depths
 
 ```python
-kvals = [1, 2, 5, 7, 10, 15, 20, 25, 30, 50]
+kvals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 50]
 knn_score_train = []
 
 for i in kvals:
@@ -222,19 +225,11 @@ ax.set_xlabel("kvals")
 ax.set_ylabel("Mean Accuracy Score")
 ```
 
-
-
-
-
-    Text(0,0.5,'Mean Accuracy Score')
-
-
-
-
 ![png](Main_Model_files/Main_Model_33_1.png)
 
+From above analysis, we determine that k=3 produces optimal trainig score.
 
-
+### 6.3 Results
 
 ```python
 knn_model = KNeighborsClassifier(n_neighbors=10,weights = 'uniform')
@@ -249,14 +244,9 @@ train_score_knn = accuracy_score(y_train, y_pred_train_knn) * 100
 
 test_score_1_knn = accuracy_score(y_test_1, y_pred_test_1_knn) * 100
 test_score_3_knn = accuracy_score(y_test_3, y_pred_test_3_knn) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_knn))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_knn))
 ```
-
-
     accuracy score of the training set is 97.55%
-    accuracy score of the test set with social spambot #1 is 63.97578203834511%
-    accuracy score of the test set with social spambot #3 is 68.53448275862068%
-    
+    accuracy score of the test set with social spambot #1 is 64.42986881937436%
+    accuracy score of the test set with social spambot #3 is 67.24137931034483%
+
+We learnt that K-Nearest neighbour model performs reasonably well for both test sets, however also fall short of some of the superior performing models such as Random Forest.    
