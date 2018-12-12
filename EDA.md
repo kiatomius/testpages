@@ -262,9 +262,9 @@ Having extensively explored the data, we now move onto applying various classifi
 
 
 ***
-_[1] Bot Repository data download page (https://botometer.iuni.iu.edu/bot-repository/datasets.html)_  
+_[1] Bot Repository data download page (<https://botometer.iuni.iu.edu/bot-repository/datasets.html>)  
 _[2] Cresci-2017, page 2_  
-_[3] Shad and Gopani https://www.youtube.com/watch?v=WYCZ6ZjfAJ0_
+_[3] Shad and Gopani (<https://www.youtube.com/watch?v=WYCZ6ZjfAJ0>)
 
 
 
