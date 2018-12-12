@@ -25,12 +25,12 @@ In our commitment to adhere to scientific methods, we ruled out a number of appr
 
 ***
 
-## Summary:
-In summary, our general approach and objective may be summarized as follows:
+## Overview:
+Our general approach and objective may be summarized as follows:
 * Explore dataset published by Cresci-2017
 * Devise Classification Models to detect genuine twitter users and automated bots
-* Seek to achieve accuracy score at levels at least equivalent to Cresci-2017
-* Seek to improve the accuracy score with our unique approach where possible.
+* Seek to achieve accuracy score by incorporating text analysis
+* Evaluate our methodologies and identify future scopes
 
 ***
 
