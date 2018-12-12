@@ -31,10 +31,160 @@ From here, we constructed the training & testing dataset in identical manner to 
 
 ## 2. Data Cleaning
 
-The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.
+The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.The cleaning process is presented below.
+
+### 2.1 Narrowing columns 
+
+```python
+#download data for genuine users
+
+df_gen_users = pd.read_csv('datasets_full.csv/genuine_accounts.csv/users.csv')
+
+#define columns to keep for investigation
+
+columns_to_keep = ['id', 'name', 'screen_name', 'statuses_count', 'followers_count',
+       'friends_count', 'favourites_count', 'listed_count', 'url', 'lang',
+       'time_zone', 'location', 'default_profile', 'default_profile_image',
+       'geo_enabled', 'profile_image_url', 'profile_banner_url',
+       'profile_use_background_image', 'profile_background_image_url_https',
+       'profile_text_color', 'profile_image_url_https','follow_request_sent', 
+       'verified','description', 'following']
+```
+
+### 2.2 Cleaning categorical values to binary values 
+
+```python
+#define data cleaning functions
+#cleaning step 1: check if screen_name has a word 'bot' in it
+
+def screen_name_check (df):
+    
+    word = 'bot'
+    bot_name = []
+    k = 0
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['screen_name']):
+                k = 0
+        else: 
+            if word in df.iloc[i,:]['screen_name']:
+                k = 1
+            else:
+                k = 0
+        bot_name.append(k)
+    
+    return bot_name
 
 
-## 2. EDA
+#cleaning step 2: check if location parameter is present
+
+def location_check(df):
+    
+    loc = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['location']):
+            loc.append(0)
+        else:
+            loc.append(1)
+            
+    return loc
+
+# cleaning step 3
+# Set description to 1 if it contains either of these words: 
+#‘bot’, ‘robot’, ‘artificial’, ‘intelligence’, ‘neural’, ‘network’, ‘automatic’ and 0 otherwise.
+
+def description_check(df):
+    keyword = ['bot', 'robot', 'artificial', 'intelligence', 'neural', 'network', 'automatic']
+    bot_des = []
+    k = 0
+
+    for i in range (len(df)):
+        for keyword in keyword:
+            if pd.isnull(df.iloc[i,:]['description']):
+                k = 0
+            else:
+                if df.iloc[i,:]['description'].find(keyword) == -1:
+                    k = 0
+                else:
+                    k = 1
+        bot_des.append(k)
+        
+    return bot_des
+
+#cleaning step 4:
+#Set verified to 1 if the sample’s verified features contents are True and 0 otherwise.
+
+def verified_check(df):
+    ver = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['verified']):
+            ver.append(0)
+        else:
+            ver.append(1)
+    return ver
+
+#cleaning step 5:
+#Check if default profile exists or not.
+
+def default_profile_check (df):
+    
+    default_profile = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['default_profile']):
+            default_profile.append(0)
+        else:
+            default_profile.append(1)
+    
+    return default_profile
+
+#cleaning step 6:
+#Check if default profile image is used or not.
+
+def default_image_check (df):
+    
+    default_profile_image = []
+
+    for i in range (len(df)):
+        if pd.isnull(df.iloc[i,:]['default_profile_image']):
+            default_profile_image.append(0)
+        else:
+            default_profile_image.append(1)
+    
+    return default_profile_image
+```
+
+```python
+def master_clean (df):
+    bot_name = screen_name_check (df)
+    loc = location_check (df)
+    bot_des = description_check (df)
+    ver = verified_check (df)
+    default_profile = default_profile_check (df)
+    default_profile_image = default_image_check (df)
+    
+    df = pd.DataFrame({'screen_name': df['screen_name'],
+                       'name': df['name'],
+                       'bot_in_name':bot_name,
+                       'bot_in_des':bot_des,
+                       'location': loc,
+                       'verified': ver,
+                       'default_profile': default_profile,
+                       'default_profile_image': default_profile_image,
+                       'followers_count': df['followers_count'],
+                       'listed_count': df['listed_count'],
+                       'friends_count': df['friends_count'],
+                       'favourites_count': df['favourites_count'],
+                       'statuses_count': df['statuses_count'],
+                       'bot_or_not':df['bot']
+                       })
+    
+    return df
+```
+
+## 3. EDA
 
 After cleaning the data, we perform an initial analysis of the number of friends, number of followers and the number of lists the user is part of for both humans and bots. 
 
