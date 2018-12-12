@@ -36,5 +36,5 @@ In summary, our general approach and objective may be summarized as follows:
 
 _team Github page (<https://github.com/motoakisumi>)_  
 _picture source (<https://www.theverge.com/2017/8/13/16125852/identify-twitter-bot-botometer-spambot-program>)_  
-_bot repository (<https://botometer.iuni.iu.edu/bot-repository/index.html>)_
+_bot repository (<https://botometer.iuni.iu.edu/bot-repository/index.html>)_  
 _cresci_2017(<https://arxiv.org/abs/1701.03017>)_
