@@ -19,7 +19,7 @@ We obtained the original dataset used in Cresci-2017 from Bot Repository[1]. The
 
 From here, we constructed the training & testing dataset in identical manner to those presented in the paper. The methodology behind the construction of the data is summarized in the below chart. In essence, it can be described as follows:
 * Training dataset is created by sampling 50% data of data from Genuine accounts, and 50% from **Traditional Spambots #1**.
-* Testing dataset #1 is created by taking **all** data from Social Spambots #1, and equal number of samples from genuine accounts that were not used in creaging training dataset.
+* Testing dataset #1 is created by taking **all** data from Social Spambots #1, and equal number of samples from genuine accounts that were not used in creating training dataset.
 * Testing dataset #2 is created by taking **all** data from Social Spambots #2, and equal number of samples from genuine accounts that were not used in creating training dataset.
 
 <p align="center">
@@ -31,7 +31,7 @@ From here, we constructed the training & testing dataset in identical manner to 
 
 ## 2. Data Cleaning
 
-The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors. After widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.The cleaning process is presented below.
+The raw dataset consists of a large number of observation types from users' tweets themselves, to number of friends, number of hashtags, number of followers and so on. In seeking to extract the information that may become powerful predictors; after widely exploring the relevant literature for varaible selection, we refered to a research by Manthan Shah and Vatsal Gopani [3] for selecting relevant variable as well as cleaning them to be fed into models.The cleaning process is presented below.
 
 ### 2.1 Narrowing columns 
 
@@ -206,20 +206,20 @@ Some of the key defined objects are as follows:
 
 ### 3.1 Exploring relationships between multiple varibles:
 
-#### 3.1.1 **followers_couint vs friends_count**
+#### 3.1.1 **followers_count vs friends_count**
 * A casual separation between the clustering of human-data and bot-data can be observed, with bots tending to have lower number of followers given friends count, while humans seem to have more even relationship between friends_count and followers_count.
 * It appears that bots may have tendency to focus on increasing friends_count over other metrics. This complements the theory on bots regarding bots existing primarily to tweet, re-tweet statuses which promote their agenda to their 'friends'. This behavior is different from humans as humans (in ideal world) use twitter as a medium of exchange of information and are interested in both receiving and sending tweets.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
-#### 3.1.2 **listen_count vs friends_count**
-* A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clearm since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of human.
-* One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
+#### 3.1.2 **listed_count vs friends_count**
+* A casual separation between the clustering of human-data and bot-data can also be observed, but the separation does not seem as clear since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compared to those of human.
+* One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots, one can argue, have no need for any classification of  information. 
 
-![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
+![png](EDA_Dec_2_files/EDA_Dec_12_1.png)
 
 
-#### 3.1.3 **listed_count vs followers_couint**
+#### 3.1.3 **listed_count vs followers_count**
 * It is also worth noting that across certain variables, such as presented hereby (listed_count vs followers_count), it is not possible to see any separation of clustering between human data and bot data.
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_2.png)
