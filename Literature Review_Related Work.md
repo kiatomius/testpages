@@ -40,4 +40,4 @@ _Example of Botometer assessing an account of @ianbremmer_
 
 ***
 
-_botometer page (https://botometer.iuni.iu.edu/#!/)_
+_botometer page (<https://botometer.iuni.iu.edu/#!/>)_
