@@ -1,5 +1,5 @@
 ---
-title: Machine Learning & Analysis for Twitter Bot Detection
+title: Overview
 ---
 <p align="left">
   <img src="index_files/twitcensor.jpg" alt="twitcensor" width="300"/>
