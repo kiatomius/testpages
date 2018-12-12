@@ -1,6 +1,6 @@
 ---
 title: Models
-notebook: EDA_Dec_2.ipynb
+notebook: Main_Model.ipynb
 nav_include: 3
 ---
 
