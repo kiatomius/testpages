@@ -57,23 +57,18 @@ train_score_bag = accuracy_score(y_train, y_pred_train_bag) * 100
 
 test_score_1_bag = accuracy_score(y_test_1, y_pred_test_1_bag) * 100
 test_score_3_bag = accuracy_score(y_test_3, y_pred_test_3_bag) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_bag))
-print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_bag))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_bag))
 ```
-
-
-    C:\Users\motoa\Anaconda3\lib\site-packages\sklearn\ensemble\bagging.py:618: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-      y = column_or_1d(y, warn=True)
-    
-
+### 2.2 Results
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #1 is 84.81331987891019%
     accuracy score of the test set with social spambot #3 is 54.418103448275865%
     
+* Bagging had significantly increased the testing score for social spambot #1, however it performed poorly for the testing set - social spambot #3. This could be the result of fast diminishing accuracy score of overfitting that we saw in a simple decision tree model.
 
+## 3 Boosting
 
+### 3.1 Designing the model
+# We now try to amend the abovementioned overfitting problem bia boosting model.
 
 ```python
 ada_model = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3),  
@@ -85,7 +80,6 @@ y_pred_train_ada = ada_model.predict(X_train)
 y_pred_test_1_ada = ada_model.predict(X_test_1)
 y_pred_test_3_ada = ada_model.predict(X_test_3)
 
-
 train_score_ada = accuracy_score(y_train, y_pred_train_ada) * 100
 test_score_1_ada = accuracy_score(y_test_1, y_pred_test_1_ada) * 100
 test_score_3_ada = accuracy_score(y_test_3, y_pred_test_3_ada) * 100
@@ -94,72 +88,19 @@ train_staged_score_ada = list(ada_model.staged_score(X_train, y_train))
 test_staged_score_1_ada = list(ada_model.staged_score(X_test_1, y_test_1))
 test_staged_score_3_ada = list(ada_model.staged_score(X_test_3, y_test_3))
 ```
-
-
-    C:\Users\motoa\Anaconda3\lib\site-packages\sklearn\utils\validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-      y = column_or_1d(y, warn=True)
-    
-
-
-
-```python
-fig, ax = plt.subplots(1,3, figsize = (15,5))
-
-ax[0].plot(np.arange(1, 801, 1), train_staged_score_ada)
-ax[0].set_title("Training Set Accuracy Score")
-ax[0].set_xlabel("number of iteration")
-ax[0].set_ylabel("Accuracy Score")
-
-ax[1].plot(np.arange(1, 801, 1), test_staged_score_1_ada)
-ax[1].set_title("Test Set #1 Accuracy Score")
-ax[1].set_xlabel("number of iteration")
-ax[1].set_ylabel("Accuracy Score")
-
-ax[2].plot(np.arange(1, 801, 1), test_staged_score_3_ada)
-ax[2].set_title("Test Set #3 Accuracy Score")
-ax[2].set_xlabel("number of iteration")
-ax[2].set_ylabel("Accuracy Score")
-```
-
-
-
-
-
-    Text(0,0.5,'Accuracy Score')
-
-
-
-
-![png](Main_Model_files/Main_Model_25_1.png)
-
-
-
-
-```python
-
-```
-
-
-
-
-```python
-
-```
-
-
-
-
-```python
-print('accuracy score of the training set is {}%'.format(train_score_ada))
-print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_ada))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_ada))
-```
-
+### 3.2 Results
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #1 is 88.04238143289606%
     accuracy score of the test set with social spambot #3 is 52.90948275862068%
+
+### 3.3 Exploring the number of iteration
+
+![png](Main_Model_files/Main_Model_25_1.png)
+
     
+
+## 4 Random Forest Model
 
 
 
