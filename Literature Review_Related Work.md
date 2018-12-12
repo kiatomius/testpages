@@ -1,11 +1,12 @@
 ---
-title: Literature Review/Related Work
+title: Related Work
 nav_include: 1
 ---
+Our Research will extensively refer to the following reasearch paper:  
 
-## Cresci-2017
 **The paradigm-shift of social spambots: Evidence, theories, and tools for the arms race**  
-Stefano Cresci, Roberto Di Pietro, Marinella Petrocchi, Angelo Spognardi, Maurizio Tesconi
+_Stefano Cresci, Roberto Di Pietro, Marinella Petrocchi, Angelo Spognardi, Maurizio Tesconi_  
+_Cresci-2017_   
 
 Cresci-2017 approaches the topic of automated twitter-bots detection through two major ways:
 
