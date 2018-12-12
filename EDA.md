@@ -216,11 +216,6 @@ Some of the key defined objects are as follows:
 * A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clearm since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of human.
 * One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
 
-![png](EDA_Dec_2_files/EDA_Dec_2_10_2.png)
-
-
-
-
 ![png](EDA_Dec_2_files/EDA_Dec_2_11_1.png)
 
 * There are a couple of important observations to glean from this. First, it supplements the observations on friends_count, followers_count and listed_count made above. Second, the behavior of bots is starkly different from humans in favourites_counts and statuses_count. Bots mark nearly zero statuses as favorite and bots don’t tweet as well. 
