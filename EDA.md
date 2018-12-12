@@ -245,14 +245,20 @@ Now we investigate the distribution of individual predictors in order to closer 
 
 * This predictor has relatively similar distribution between humans and bots, making it possibily difficult to act as a powerful predictor, at least not on its own.
 
+**status_count**
+
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
 
-* Between the two graphs above, we get a deeper understanding of how the bots really operate. From our analysis, the bot twitter space can be thought of as being divided into two distinct buckets, one with bots of 0 followers and one with bots of 0 statuses. The bots in the bucket of  0 followers tweet and retweet in line with their agenda. The other bucket, bots with 0 statuses don’t tweet however follow others and contribute the number of fake followers a user has.
+* There is a striking difference between the distribution of this variable between humans and bots. It is clear that humans tweet and/or retweet far more frequently than bots, with humans' values distribute all the way up to 10,000 counts whereas bots' distribution range only up to around 200 with high concentration around 0. This stark difference could provide strong predictive support. 
 
+**favourites_count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_12_1.png)
 
-* Bots mark nearly zero statuses as favorite : how we understand this is, if bots exist to tweet or retweet their agenda or to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. 
+* This predictor also illustrates a stark difference between the distribution of bot data and human data. Bots mark nearly zero statuses as favorites_count whereas huamns range across 0 to 10,000, similarly to above status count: one possible interpretation is that, if bots exist to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. This also provides potential to be a powerful predictor.  
+
+
+Having extensively explored the data, we now move onto applying various classification methods to develop predictive models.
 
 
 ***
