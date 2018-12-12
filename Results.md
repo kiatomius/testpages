@@ -4,8 +4,9 @@ nav_include: 5
 ---
 
 ## 1. Results
+Using the dataset presented by Cresci-2017, we devised a number of classification models based on twitter user database, and we sought to improve the results by incorporating twitter/text analysis. The summary of the performance of our models are presented as below:
 
-### 1.1 User Model
+### 1.1 Prediction based on User Data
 
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
@@ -16,7 +17,7 @@ nav_include: 5
 | Logistic Regression | 97.6%       | 69.0%         | 51.7%         |
 | KNN                 | 97.6%       | 64.4%         | 67.2%         |
 
-### 1.2 User model with sentiment analysis
+### 1.2 Prediction based on User Data + Text
 
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
@@ -27,7 +28,16 @@ nav_include: 5
 | Logistic Regression | XXX%        | NA            | 51.7%         |
 | KNN                 | XXX%        | NA            | 67.2%         |
 
-## Conclusion & Future Work 
-A major challenge of predicting whether a user is bot or not is that there is no means to verify the ground truth. In our project we overcame this hurdle by taking the truth in the cresci paper (refernce in the literature review) as the true values. A couple of suggestions floated around in our discussions with the other teams and TF on ways to determine the ground truth: 
-i)	We could take random samples of twitter data and manually test it. We argued against it as we were unsure of our competency in distinguishing between the two. This is further supported by the data which notes that the accuracy of human annotators ranged from 69% to 82%. 
-ii)	We could use BotOrNot? which generates a score between 0 to 5, indicating the probability of whether a specific user account is automated twitter bot or not. Other than the fact that BotOrNot? is extremely time-taking, we also struggle with accuracy issues. The paper lists the accuracy of the software between 73% to 91%. 
+
+### 1.3 Summary & Thoughts
+We were able to achieve the target accuracy levels that we had originally set (based on Yang et al.) through our models. By combining the text analysis, we also achieved the higher target accurary levels achieved by BotOrNot? (Botometer), and even approach the levels achieved by unsupervised models that Cresci-2017 had presented.  While we were pleased to achieve our initial targets, a number of questions rose that we were not fully able to comprehend at this time, and we wish to further investigate beyond this project.
+
+The first question that we faced was the unique way in which Cresci-2017 had constructed the training and testing dataset, where the 'bot' part of the data for training set and testing set stem from completely different sources. We originally combined all the bot-data, shuffled them, and split them into training/testing sets, however this resulted in unusually high testing accuracy score (consistently in 98-99% range), and we had revised the approach to Cresci-2017 methodology to carry out apple-to-apple comparison. While this turned out to be an enormously fruitful exercise in the end, we were able to fully comprehend the flaw in our original train-test split approach and how that produced these high scores.
+
+Another major question that remained was that a large number of users in Cresci-2017 dataset had no twitter data, therefore we had to drastically reduce the sample size. We were not able to comprehend why this situation exists, since it seems unlikely that twitter data and user data were separately collected by Cresci-2017. Moreover, more troubling implication was that, if the missing twitter-data were not random, this could create significant biases in our data selection, skewing our models in ways that may not allow them to perform well in 'real' dataset.
+
+A final question was, we seriously questioned why some of the accuracy scores presented in the literature were so low (Yang et. al 's 50% is almost as good as a coin-flip). This may not have stemmed from the inferior construction of these models in relevant literature, but their models, in spite of train-test splits, were still highly biased to their unique dataset that they obtained, and as the sample data evolves, models quickly become outdated. While our performance was good, we may also fall into this trap, and require a careful evaluation.
+
+A sobering implication to derive from here may be that, correct sampling of twitter data is inherently difficult, for population size is exponentially large, and however hard we seek to devise optimal models, they would be biased towards the data that they were trained on. 
+
+Our attempt to progress upon this thought in presented in the following Future Scope Chapter.
