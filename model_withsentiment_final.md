@@ -72,38 +72,13 @@ ax.legend()
 
 * It appears sentimental scores for human and bot tweets are spread out across the spectrum, with no clear separation between the two types. However, some clustering of bot data can be observed for both sample sets, in the positive polarity area. These may become interesting additional predictors.
 
-## 1.3 Model preparation
-
-
-
-
 
 ## 2. Dropping missing data
-## 2.1. Model Preparation
-
+### 2.1. Model Preparation
+By dropping missing data, our sample number decreased. The number of samples are 1120 for training data and 386 for test data.
 ```python
-#add a feature of missingness
-def add_missingness(df):
-    inds = np.where(df.isnull())
-    inds = np.array(inds).tolist()
-    inds
-    inds_list = []
-    for i in inds[0]:
-        if i not in inds_list:
-            inds_list.append(i)
-    df["Missingness"] = 0
-    for i in inds_list:
-        df.iloc[i,-1] = 1
-    return df
-```
-
-```python
-df_train_2=add_missingness(df_train)
-df_test_3_2=add_missingness(df_test_3)
-```
-```python
+We standardized conitunous variables to equally treat features.
 # standardize dataset
-
 def standardize (df,df_train):
     con_var = ['followers_count', 'listed_count', 'friends_count', 'favourites_count', 'statuses_count',
                'retweet_count_mean','favorite_count_mean','num_hashtags_mean','num_urls_mean','num_mentions_mean',
@@ -122,206 +97,66 @@ X_train_norm_dn = standardize(X_train_dn,X_train_dn)
 X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 ```
 
-## 2.2. Results
+### 2.2. Results
+The model we used is same as the one we used in our Main model.
 ### 2.2.1 Decision Tree
-
-```python
-# Simple Decision Tree with dropna
-
-decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
-decision_model.fit(X_train_dn, y_train_dn)
-
-y_pred_train_dec = decision_model.predict(X_train_norm_dn)
-y_pred_test_3_dec = decision_model.predict(X_test_3_norm_dn)
-
-train_score_dec = accuracy_score(y_train_dn, y_pred_train_dec) * 100
-test_score_3_dec = accuracy_score(y_test_dn, y_pred_test_3_dec) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_dec))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_dec))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 95.07772020725389%
 
 ### 2.2.2 Bagging
 
-```python
-# bagging with dropna
-overfit_depth = 100
-N = 100
-
-bagging_model = BaggingClassifier(DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=overfit_depth), 
-                                  n_estimators = N, bootstrap = True, oob_score = True)
-bagging_model.fit(X_train_norm_dn, y_train_dn)
-
-y_pred_train_bag = bagging_model.predict(X_train_norm_dn)
-y_pred_test_3_bag = bagging_model.predict(X_test_3_norm_dn)
-
-train_score_bag = accuracy_score(y_train_dn, y_pred_train_bag) * 100
-test_score_3_bag = accuracy_score(y_test_dn, y_pred_test_3_bag) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_bag))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_bag))
-```
-
-
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 95.07772020725389%
 
 ### 2.2.3 Boosting
-```python
-#ada boosting with dropna
-ada_model = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3),  
-                               n_estimators=800, learning_rate=0.05)
-
-ada_model.fit(X_train_norm_dn, y_train_dn)
-
-y_pred_train_ada = ada_model.predict(X_train_norm_dn)
-y_pred_test_3_ada = ada_model.predict(X_test_3_norm_dn)
-
-train_score_ada = accuracy_score(y_train_dn, y_pred_train_ada) * 100
-test_score_3_ada = accuracy_score(y_test_dn, y_pred_test_3_ada) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_ada))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_ada))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 95.07772020725389%
 
 
 ### 2.2.4 Random Forests
-```python
-#Random Forests with dropna
-overfit_depth = 100
-N = 100
-
-rf_model = RandomForestClassifier(n_estimators = N, criterion='gini', 
-                                  max_features='auto', max_depth = overfit_depth, bootstrap=True,
-                                 oob_score=True)
-rf_model.fit(X_train_norm_dn, y_train_dn)
-
-y_pred_train = rf_model.predict(X_train_norm_dn)
-y_pred_test_3 = rf_model.predict(X_test_3_norm_dn)
-
-train_score = accuracy_score(y_train_dn, y_pred_train) * 100
-test_score_3 = accuracy_score(y_test_dn, y_pred_test_3) * 100
-
-oobs_score = rf_model.oob_score_
-
-print('accuracy score of the training set is {}%'.format(train_score))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3))
-```
-
-
-    /anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:8: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
-      
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 96.6321243523316%
 
-
-
-
-```python
-#showing significant features
-pd.Series(rf_model.feature_importances_,index=list(X_train_norm_dn)).sort_values().plot(kind="barh")
-```
-
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a21919ef0>
-
-
-
-
 ![png](model_withsentiment_final_files/model_withsentiment_final_36_1.png)
 
-###2.2.5 Multinomial Logistic Regression
-
-
-```python
-# Multinominal Logistic Regression with dropna
-
-log_model = LogisticRegressionCV(fit_intercept=True, cv=5, multi_class="ovr", penalty='l2', max_iter=10000)
-log_model.fit(X_train_dn, y_train_dn.values.reshape(-1))
-
-y_pred_train_log = log_model.predict(X_train_norm_dn)
-y_pred_test_3_log = log_model.predict(X_test_3_norm_dn)
-
-train_score_log = accuracy_score(y_train_dn, y_pred_train_log) * 100
-test_score_3_log = accuracy_score(y_test_dn, y_pred_test_3_log) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_log))
-```
-
+### 2.2.5 Multinomial Logistic Regression
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 95.59585492227978%
 
-###2.2.6 kNN
-```python
-#kNN  with dropna
-kvals = [1, 2, 5, 7, 10, 15, 20, 25, 30, 50]
-knn_score_train = []
-
-for i in kvals:
-    model_knn = KNeighborsClassifier(n_neighbors=i, weights = 'uniform')
-    train_score = cross_val_score(model_knn, X = X_train_norm_dn, y = y_train_dn.values.reshape(-1), cv=5)
-    knn_score_train.append(train_score.mean())
-
-fig, ax = plt.subplots(1,1, figsize = (12,5))
-
-ax.plot(kvals, knn_score_train)
-ax.set_title("Train Set Score")
-ax.set_xlabel("kvals")
-ax.set_ylabel("Mean Accuracy Score")
-```
-
-
-
-
-
-    Text(0,0.5,'Mean Accuracy Score')
-
-
-
+### 2.2.6 kNN
 
 ![png](model_withsentiment_final_files/model_withsentiment_final_41_1.png)
-
-
-
-
-```python
-knn_model = KNeighborsClassifier(n_neighbors=10,weights = 'uniform')
-knn_model.fit(X_train_dn, y_train_dn.values.reshape(-1))
-
-y_pred_train_knn = knn_model.predict(X_train_norm_dn)
-y_pred_test_3_knn = knn_model.predict(X_test_3_norm_dn)
-
-train_score_knn = accuracy_score(y_train_dn, y_pred_train_knn) * 100
-test_score_3_knn = accuracy_score(y_test_dn, y_pred_test_3_knn) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_knn))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 91.19170984455958%
 
-
-
  
 ## 3. Linear Regression Imputation
-## 3.1 Model Preparation
+### 3.1 Model Preparation
+In order to examine whether the missinness is at random or not, we included a column which shows missingness of the row. Then we imputed missing data by linear regression using the complete data from the user dataset.
+```python
+#add a feature of missingness
+def add_missingness(df):
+    inds = np.where(df.isnull())
+    inds = np.array(inds).tolist()
+    inds
+    inds_list = []
+    for i in inds[0]:
+        if i not in inds_list:
+            inds_list.append(i)
+    df["Missingness"] = 0
+    for i in inds_list:
+        df.iloc[i,-1] = 1
+    return df
+```
+```python
+df_train_2=add_missingness(df_train)
+df_test_3_2=add_missingness(df_test_3)
+```
 ```python
 # index of rows which contain NaN
 inds = np.where(df_train_2.isna())
@@ -355,14 +190,7 @@ def linear_imputation(df,columns_withna):
 df_train_3 = linear_imputation(df_train_2, columns_to_keep_nan)
 df_test_3_3 = linear_imputation(df_test_3_2, columns_to_keep_nan)
 ```
-
-
-    (2000, 22)
-
-
-
-    (928, 22)
-
+The number of samples are 2000 for training data and 928 for test data.
 
 ```python
 # standardize dataset
@@ -385,107 +213,13 @@ X_train_norm_dn = standardize(X_train_dn,X_train_dn)
 X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 ```
 
-## 3.2 Results
+### 3.2 Results
 ### 3.2.1 Decision Tree
-
-
-```python
-# Simple Decision Tree with linear imputation
-
-decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
-decision_model.fit(X_train, y_train)
-
-y_pred_train_dec = decision_model.predict(X_train_norm)
-y_pred_test_3_dec = decision_model.predict(X_test_3_norm)
-
-train_score_dec = accuracy_score(y_train, y_pred_train_dec) * 100
-test_score_3_dec = accuracy_score(y_test_3, y_pred_test_3_dec) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_dec))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_dec))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 49.0301724137931%
 
-
-
-
-
-
-
-```python
-depth = np.arange(2,30,1)
-decision_score_mean=[]
-decision_score_std=[]
-test_1_score = []
-test_3_score = []
-
-for i in depth:
-    decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=i)
-    decision_model.fit(X_train_norm, y_train)
-    score = cross_val_score(estimator = decision_model, X = X_train_norm, y = y_train, cv = 5)
-    decision_score_mean.append(score.mean())
-    decision_score_std.append(score.std())
-    test_3_score.append(accuracy_score(y_test_3, decision_model.predict(X_test_3_norm)))
-```
-
-
-
-
-```python
-fig, ax = plt.subplots(1,2, figsize = (15,5))
-
-ax[0].plot(depth, decision_score_mean, '-*')
-ax[0].fill_between(
-    depth,
-    np.array(decision_score_mean) - 2 * np.array(decision_score_std),
-    np.array(decision_score_mean) + 2 * np.array(decision_score_std),
-    alpha=.3)
-ax[0].set_title('validation accuracy vs depth')
-ax[0].set_xlabel('max depth')
-ax[0].set_ylabel('validation accuracy +- 2 std')
-
-ax[1].plot(depth, test_3_score)
-ax[1].set_title('spambots3 test set accuracy vs depth')
-ax[1].set_xlabel('max depth')
-ax[1].set_ylabel('test set accuracy score')
-```
-
-
-
-
-
-    Text(0,0.5,'test set accuracy score')
-
-
-
-
-![png](model_withsentiment_final_files/model_withsentiment_final_28_1.png)
-
 ### 3.2.2 Bagging
-
-
-```python
-# bagging with linear imputation
-overfit_depth = 100
-N = 100
-
-bagging_model = BaggingClassifier(DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=overfit_depth), 
-                                  n_estimators = N, bootstrap = True, oob_score = True)
-bagging_model.fit(X_train_norm, y_train)
-
-y_pred_train_bag = bagging_model.predict(X_train_norm)
-y_pred_test_3_bag = bagging_model.predict(X_test_3_norm)
-
-train_score_bag = accuracy_score(y_train, y_pred_train_bag) * 100
-test_score_3_bag = accuracy_score(y_test_3, y_pred_test_3_bag) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_bag))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_bag))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 94.07327586206897%
@@ -493,153 +227,43 @@ print('accuracy score of the test set with social spambot #3 is {}%'.format(test
 
 ### 3.2.3 Boosting
 
-```python
-#ada boosting with linear imputation
-ada_model = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=3),  
-                               n_estimators=800, learning_rate=0.05)
-
-ada_model.fit(X_train_norm, y_train)
-
-y_pred_train_ada = ada_model.predict(X_train_norm)
-y_pred_test_3_ada = ada_model.predict(X_test_3_norm)
-
-train_score_ada = accuracy_score(y_train, y_pred_train_ada) * 100
-test_score_3_ada = accuracy_score(y_test_3, y_pred_test_3_ada) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_ada))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_ada))
-```
-
-
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 82.4353448275862%
 
 ### 3.2.4 Random Forests
-
-
-```python
-#Random Forests with linear imputation
-overfit_depth = 100
-N = 100
-
-rf_model = RandomForestClassifier(n_estimators = N, criterion='gini', 
-                                  max_features='auto', max_depth = overfit_depth, bootstrap=True,
-                                 oob_score=True)
-rf_model.fit(X_train_norm, y_train)
-
-y_pred_train = rf_model.predict(X_train_norm)
-y_pred_test_3 = rf_model.predict(X_test_3_norm)
-
-train_score = accuracy_score(y_train, y_pred_train) * 100
-test_score_3 = accuracy_score(y_test_3, y_pred_test_3) * 100
-
-oobs_score = rf_model.oob_score_
-
-print('accuracy score of the training set is {}%'.format(train_score))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3))
-```
-      
+  
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 83.1896551724138%
-
-
-
-
-```python
-#showing significant features
-pd.Series(rf_model.feature_importances_,index=list(X_train_norm)).sort_values().plot(kind="barh")
-```
-
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a228d3080>
-
-
-
 
 ![png](model_withsentiment_final_files/model_withsentiment_final_34_1.png)
 
 
-###3.2.5 Multinomial Logistic Regression
-
-
-
-```python
-# Multinominal Logistic Regression with linear imputation
-
-log_model = LogisticRegressionCV(fit_intercept=True, cv=5, multi_class="ovr", penalty='l2', max_iter=10000)
-log_model.fit(X_train, y_train.values.reshape(-1))
-
-y_pred_train_log = log_model.predict(X_train_norm)
-y_pred_test_3_log = log_model.predict(X_test_3_norm)
-
-train_score_log = accuracy_score(y_train, y_pred_train_log) * 100
-test_score_3_log = accuracy_score(y_test_3, y_pred_test_3_log) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_log))
-```
-
+### 3.2.5 Multinomial Logistic Regression
 
     accuracy score of the training set is 99.95%
     accuracy score of the test set with social spambot #3 is 95.6896551724138%
 
 
-###3.2.6 kNN
-
-
-```python
-#kNN  with linear imputation
-kvals = [1, 2, 5, 7, 10, 15, 20, 25, 30, 50]
-knn_score_train = []
-
-for i in kvals:
-    model_knn = KNeighborsClassifier(n_neighbors=i, weights = 'uniform')
-    train_score = cross_val_score(model_knn, X = X_train_norm, y = y_train.values.reshape(-1), cv=5)
-    knn_score_train.append(train_score.mean())
-
-fig, ax = plt.subplots(1,1, figsize = (12,5))
-
-ax.plot(kvals, knn_score_train)
-ax.set_title("Train Set Score")
-ax.set_xlabel("kvals")
-ax.set_ylabel("Mean Accuracy Score")
-```
-
-
-
-
-
-    Text(0,0.5,'Mean Accuracy Score')
-
-
-
+### 3.2.6 kNN
 
 ![png](model_withsentiment_final_files/model_withsentiment_final_39_1.png)
-
-
-
-
-```python
-knn_model = KNeighborsClassifier(n_neighbors=10,weights = 'uniform')
-knn_model.fit(X_train, y_train.values.reshape(-1))
-
-y_pred_train_knn = knn_model.predict(X_train)
-y_pred_test_3_knn = knn_model.predict(X_test_3)
-
-train_score_knn = accuracy_score(y_train, y_pred_train_knn) * 100
-test_score_3_knn = accuracy_score(y_test_3, y_pred_test_3_knn) * 100
-
-print('accuracy score of the training set is {}%'.format(train_score_log))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_knn))
-```
-
 
     accuracy score of the training set is 100.0%
     accuracy score of the test set with social spambot #3 is 92.88793103448276%
 
+## 4. Summary
 
+### 4.1 Comparison of model performance
 
+| Model               | Test score #3(main model) | Test score #3(dropNaN) | Test score #3(linear imputation) |
+|---------------------|-------------|---------------|---------------|
+| Decision Tree       | 98.9%       | 69.9%         | 77.7%         |
+| Bagging             | 100%        | 84.8%         | 54.4%         |
+| Boosting            | 100%        | 88.0%         | 52.9%         |
+| Random Forest       | 100%        | 84.1%         | 77.5%         |
+| Logistic Regression | 97.6%       | 69.0%         | 51.7%         |
+| KNN                 | 97.6%       | 64.4%         | 67.2%         |
 
+* As the above chart shows, Random Forest model had the highest accuracy score for both testing sets, indicating the high predictive power as well as the robustness of its performance across different types of automates bots. 
+* By separating the results between two test scores, Boosting performed best for Test Score #1, while Decision Tree with depth=3 performed best for Test score #3. While the margins of their respective performance over Random Forest are narrow, this indicates that it could be optimal to choose different models to predict certain types of automated bots.
+* We have managed to achieve our initial target of beating the testing scores for Yang. et al for both testing sets. We have also beat BotOrNot? for Testing Set #1, but fell short of their performance for Testing Set #3, indicating further scope for improvement.
