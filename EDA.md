@@ -206,7 +206,6 @@ Some of the key defined objects are as follows:
 
 ### 3.1 Friends_Count, Followers_count, listed_count
 
-
 ![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
 
 **Comments**
