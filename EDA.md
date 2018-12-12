@@ -1,5 +1,5 @@
 ---
-title: Description of Data and EDA
+title: EDA
 nav_include: 2
 ---
 ## 1. Introduction and Description of Data
