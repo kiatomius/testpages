@@ -257,13 +257,14 @@ X_test_3_norm_dn = standardize(X_test_dn,X_train_dn)
 
 | Model               | Test score #3(main model) | Test score #3(dropNaN) | Test score #3(linear imputation) |
 |---------------------|-------------|---------------|---------------|
-| Decision Tree       | 98.9%       | 69.9%         | 77.7%         |
-| Bagging             | 100%        | 84.8%         | 54.4%         |
-| Boosting            | 100%        | 88.0%         | 52.9%         |
-| Random Forest       | 100%        | 84.1%         | 77.5%         |
-| Logistic Regression | 97.6%       | 69.0%         | 51.7%         |
-| KNN                 | 97.6%       | 64.4%         | 67.2%         |
+| Decision Tree       | 77.7%       | 95.1%         | 49.0%         |
+| Bagging             | 54.4%        | 95.1%         | 94.1%         |
+| Boosting            | 52.9%        | 95.1%         | 82.4%         |
+| Random Forest       | 77.5%        | 96.7%         | 83.2%         |
+| Logistic Regression | 51.7%       | 95.6%         | 95.7%         |
+| KNN                 | 67.2%       | 91.2%         | 92.9%         |
 
-* As the above chart shows, Random Forest model had the highest accuracy score for both testing sets, indicating the high predictive power as well as the robustness of its performance across different types of automates bots. 
-* By separating the results between two test scores, Boosting performed best for Test Score #1, while Decision Tree with depth=3 performed best for Test score #3. While the margins of their respective performance over Random Forest are narrow, this indicates that it could be optimal to choose different models to predict certain types of automated bots.
-* We have managed to achieve our initial target of beating the testing scores for Yang. et al for both testing sets. We have also beat BotOrNot? for Testing Set #1, but fell short of their performance for Testing Set #3, indicating further scope for improvement.
+* We were able to obtain higher test scores in general with our combined dataset with sentiment and text features. The highest test score was 96.7% with Random Forest model from the dataset which dropped missing data. 
+* By employing Random Forest, we found that the important features to detect bots are faviorite count both per tweet and user, and status count. Subjectivity from the sensitive analysis contributed as well. However, the significance of coefficient of missingness made us suspicious about the randomness of missing data.
+![png](model_withsentiment_final_files/bias_missingness.png)
+* Above figure shows that there is a clear separation between data with missing data and data without missing data in terms of favourite count (one of the most important feature). Thus, we cannot deny the fact that dropping or imputing missing data creates bias in our model.
