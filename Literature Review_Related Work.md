@@ -3,7 +3,6 @@ title: Related Work
 nav_include: 1
 ---
 Our research will extensively refer to the following reasearch paper:  
-
 ***
 **The paradigm-shift of social spambots: Evidence, theories, and tools for the arms race**  
 _Stefano Cresci, Roberto Di Pietro, Marinella Petrocchi, Angelo Spognardi, Maurizio Tesconi_  
