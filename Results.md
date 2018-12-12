@@ -6,6 +6,7 @@ nav_include: 5
 ## 1. Results
 
 ### 1.1 User Model
+
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
 | Decision Tree       | 98.9%       | 69.9%         | 77.7%         |
@@ -16,6 +17,7 @@ nav_include: 5
 | KNN                 | 97.6%       | 64.4%         | 67.2%         |
 
 ### 1.2 User model with sentiment analysis
+
 | Model               | Train score | Test score #1 | Test score #3 |
 |---------------------|-------------|---------------|---------------|
 | Decision Tree       | XXX%        | NA            | 77.7%         |
