@@ -4,8 +4,11 @@ notebook: Main_Model.ipynb
 nav_include: 3
 ---
 
-## 1. Stimple Decision Tree with Max Depth = 3
+## 1. Stimple Decision Tree
 
+* A simple desicion tree model with depth set at 3
+
+### 1.1 Tuning and fitting the model
 ```python
 decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=3)
 decision_model.fit(X_train, y_train)
@@ -20,20 +23,12 @@ train_score_dec = accuracy_score(y_train, y_pred_train_dec) * 100
 test_score_1_dec = accuracy_score(y_test_1, y_pred_test_1_dec) * 100
 test_score_3_dec = accuracy_score(y_test_3, y_pred_test_3_dec) * 100
 
-print('accuracy score of the training set is {}%'.format(train_score_dec))
-print('accuracy score of the test set with social spambot #1 is {}%'.format(test_score_1_dec))
-print('accuracy score of the test set with social spambot #3 is {}%'.format(test_score_3_dec))
-
 ```
-
-
     accuracy score of the training set is 98.9%
     accuracy score of the test set with social spambot #1 is 69.87891019172552%
     accuracy score of the test set with social spambot #3 is 77.69396551724138%
-    
 
-
-
+### 1.2 Exploring the test score with different depth
 ```python
 depth = np.arange(2,15,1)
 decision_score_mean=[]
