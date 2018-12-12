@@ -206,15 +206,18 @@ Some of the key defined objects are as follows:
 
 ### 3.1 Exploring relationships between multiple varibles:
 
-![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
-
 **followers_couint vs friends_count**
 * A casual separation between the clustering of human-data and bot-data can be observed, with bots tending to have lower number of followers given friends count, while humans seem to have more even relationship between friends_count and followers_count.
 * It appears that bots may have tendency to focus on increasing friends_count over other metrics. This complements the theory on bots regarding bots existing primarily to tweet, re-tweet statuses which promote their agenda to their 'friends'. This behavior is different from humans as humans (in ideal world) use twitter as a medium of exchange of information and are interested in both receiving and sending tweets.
 
+![png](EDA_Dec_2_files/EDA_Dec_2_10_1.png)
+
 **listen_count vs friends_count**
 * A casual separation between the clustering of human-data nad bot-can also be observed, but the separation does not seem as clearm since both humans and bots have relatively similar range of 'listed_count'. This chart does however illustrate that there may be some distinct pattern in which bots register friends_count, as the variable is clearly more widely distributed compare to those of human.
 * One interpretation can be that, humans have more agency and need to organize their followers into lists for easier and efficient consumption of information. Bots one can argue, have no need for any classification of  information. 
+
+![png](EDA_Dec_2_files/EDA_Dec_2_10_2.png)
+
 
 
 
