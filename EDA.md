@@ -233,25 +233,25 @@ Now we investigate the distribution of individual predictors in order to closer 
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_13_1.png)
 
-* It can be noted from here that distribution of human friends_count tend to spike at around a few hundred, and naturally decline thereafter, whereas for bots, distribution also seem to spike at around few hundread, but there is another spike at around 2000 which we also saw in earlier analysis. The second spike may be a result of bots' artificial designs to register as many friends as possible for various manipulation purposes, but with a threshold set at certain limit at around 2000. The second spike could be a trend in aiding us to detect the automated bots. 
+* It can be noted from here that distribution of human friends_count tend to spike at around a few hundred, and naturally decline thereafter, whereas for bots, distribution also seem to spike at around few hundread, but there is another spike at around 2000 which we also saw in earlier analysis. The second spike may be a result of bots' artificial designs to register a large number of friends for various manipulation purposes, but with a threshold set at certain limit, for example, at around 2000. The second spike could be a trend in aiding us to detect the automated bots. 
 
 #### 3.2.2 **followers_count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_14_1.png)
 
-* This predictor has relatively similar distribution between humans and bots, making it possibily difficult to act as a powerful predictor, at least not on its own.
+* This predictor has relatively similar distribution between humans and bots, making it possibily difficult to act as a useful predictor, at least not on its own.
 
 #### 3.2.3 **status_count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_16_1.png)
 
-* There is a striking difference between the distribution of this variable between humans and bots. It is clear that humans tweet and/or retweet far more frequently than bots, with humans' values distribute all the way up to 10,000 counts whereas bots' distribution range only up to around 200 with high concentration around 0. This stark difference could provide strong predictive support. 
+* There is a striking difference between the distribution of this variable between humans and bots. It is clear that humans tweet and/or retweet far more frequently than bots, with humans' values distribute all the way up to 10,000 counts whereas bots' distribution range only up to around 200 with high concentration around 0. This difference could provide strong predictive support. 
 
 #### 3.2.4 **favourites_count**
 
 ![png](EDA_Dec_2_files/EDA_Dec_2_12_1.png)
 
-* This predictor also illustrates a stark difference between the distribution of bot data and human data. Bots mark nearly zero statuses as favorites_count whereas huamns range across 0 to 10,000, similarly to above status count: one possible interpretation is that, if bots exist to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. This also provides potential to be a powerful predictor.  
+* This predictor also illustrates a stark difference between the distribution of bot data and human data. Bots mark nearly zero statuses as favorites_count whereas huamns range across 0 to 10,000, similarly to above finding: one possible interpretation is that, if bots exist to increase the number of fake followers, they don’t need to mark statuses as favorite to do either. This also provides potential to be a powerful predictor.  
 
 
 Having extensively explored the data, we now move onto applying various classification methods to develop predictive models.
