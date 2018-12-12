@@ -6,9 +6,8 @@ nav_include: 3
 
 ## 1. Decision Tree
 
-* A simple decision tree classifier model with maximum depth = 3 is devised as the starting point.
-
 ### 1.1 Designing the model
+* A simple decision tree classifier model with maximum depth = 3 is devised as the starting point.
 
 ```python
 
@@ -32,59 +31,14 @@ test_score_3_dec = accuracy_score(y_test_3, y_pred_test_3_dec) * 100
     
 ### 1.3 Exploring different depths
 
-```python
-depth = np.arange(2,15,1)
-decision_score_mean=[]
-decision_score_std=[]
-test_1_score = []
-test_3_score = []
-
-for i in depth:
-    decision_model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=i)
-    decision_model.fit(X_train, y_train)
-    score = cross_val_score(estimator = decision_model, X = X_train, y = y_train, cv = 5)
-    decision_score_mean.append(score.mean())
-    decision_score_std.append(score.std())
-    test_1_score.append(accuracy_score(y_test_1, decision_model.predict(X_test_1)))
-    test_3_score.append(accuracy_score(y_test_3, decision_model.predict(X_test_3)))
-```
-
-
-
-
-```python
-fig, ax = plt.subplots(1,2, figsize = (15,5))
-
-ax[0].plot(depth, decision_score_mean, '-*')
-ax[0].fill_between(
-    depth,
-    np.array(decision_score_mean) - 2 * np.array(decision_score_std),
-    np.array(decision_score_mean) + 2 * np.array(decision_score_std),
-    alpha=.3)
-ax[0].set_title('validation accuracy vs depth')
-ax[0].set_xlabel('max depth')
-ax[0].set_ylabel('validation accuracy +- 2 std')
-
-ax[1].plot(depth, test_1_score)
-ax[1].plot(depth, test_3_score)
-ax[1].set_title('spambots3 test set accuracy vs depth')
-ax[1].set_xlabel('max depth')
-ax[1].set_ylabel('test set accuracy score')
-```
-
-
-
-
-
-    Text(0,0.5,'test set accuracy score')
-
-
-
-
 ![png](Main_Model_files/Main_Model_22_1.png)
 
+# Depth exploration confirms that depth=3 achieves the highest test set accuracy score for both test-sets, however, for test_set_1, increasing the depth would result in higher accuracy score, with convergence at around 90%. This however results in lower score for test_set_3 to low 50s%.
 
+## 2. Bagging Classifier
 
+### 2.1 Designing the model
+* As an extension of Decision Tree, we devise a bagging classifer by creating overfit depth at 100, and also increasing the number of estimators to 100.
 
 ```python
 overfit_depth = 100
